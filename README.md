@@ -44,4 +44,4 @@ Anything, anywhere, anyhow, anytime. Just do it! :heart:
 
 ## Thanks
 
-Thanks to (Simon)[https://github.com/simonkaspersen] for Mac OS terminal assistance.
+Thanks to [Simon](https://github.com/simonkaspersen) for Mac OS terminal assistance.
