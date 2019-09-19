@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <PackAsTool>true</PackAsTool>
+  </PropertyGroup>
+    
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="dein.ToolBox" Version="1.5.3" />
+  </ItemGroup>
+    
+  <ItemGroup>
+    <Folder Include="Services\" />
+    <Folder Include="Contracts\" />
+    <Folder Include="View\" />
+    <Folder Include="Providers\" />
+    <Folder Include="Providers\Local\" />
+    <Folder Include="ViewModels\" />
+    <Folder Include="Util\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="DefaultConfiguration.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Configuration.yaml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>
