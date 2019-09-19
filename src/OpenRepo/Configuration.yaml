@@ -1,2 +1,11 @@
-﻿Local:
-    /Users/erikkvanli/Repos
+﻿
+# Comments goes here?
+Local:
+    /Users/erikkvanli/Repos pt:sln pt:md
+
+
+# More comments.
+
+# Next provider:
+Local:
+    /Users/erikkvanli/Repos prefix:yolo/

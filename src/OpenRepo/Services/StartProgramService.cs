@@ -1,6 +1,9 @@
 ﻿using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using OpenRepo.Contracts;
+using OpenRepo.View;
+using OpenRepo.ViewModels;
 
 namespace OpenRepo.Services
 {
@@ -15,9 +18,20 @@ namespace OpenRepo.Services
                 return;
             }
 
-            //TODO: Create a subviewer to select the one you want for more than 1.
-            // Only a caser if a set of directories contains a lot of *.programType.
-            var startInfo = new ProcessStartInfo(programs.First())
+            if(programs.Length > 1)
+            {
+                var item = new SelectableItem(path + "*." + programType, () => programs.Select(p => new SelectableAction(FileService.GetFileName(p), () => StartProgram(p))).ToArray());
+                Viewer.Push(new ActionSelectionViewModel(item));
+            }
+            else
+            {
+                StartProgram(programs.First());
+            }
+        }
+
+        public static void StartProgram(string path)
+        {
+            var startInfo = new ProcessStartInfo(path)
             {
                 UseShellExecute = true,
             };

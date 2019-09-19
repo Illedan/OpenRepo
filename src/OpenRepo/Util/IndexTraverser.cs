@@ -5,16 +5,12 @@ namespace OpenRepo.Util
     public class IndexTraverser
     {
         private int m_max;
-        public IndexTraverser(int index, int max)
-        {
-            Current = index;
-            m_max = max;
-        }
+        public IndexTraverser(int index, int max) => Reset(index, max);
 
         public void Reset(int index, int max)
         {
-            Current = index;
             m_max = max;
+            Current = index % max;
         }
 
         public int Current { get; private set; }

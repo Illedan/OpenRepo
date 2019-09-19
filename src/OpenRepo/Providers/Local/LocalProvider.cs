@@ -12,16 +12,27 @@ namespace OpenRepo.Providers.Local
     public class LocalProvider : IProvider
     {
         private readonly string m_path;
+        private readonly string m_prefix;
+        private readonly string[] m_programTypesToStart;
 
-        public LocalProvider(string path)
+        public LocalProvider(string configuration)
         {
-            m_path = path;
+            var splittedConfig = configuration.Trim().Split();
+            m_path = splittedConfig[0];
+            m_prefix = splittedConfig
+                .FirstOrDefault(s => s.StartsWith("prefix:", StringComparison.CurrentCultureIgnoreCase))
+                ?.Split(':').Last() ?? string.Empty;
+
+            m_programTypesToStart = splittedConfig
+                .Where(s => s.StartsWith("pt:", StringComparison.CurrentCultureIgnoreCase))
+                .Select(s => s.Split(':').Last()) // Guard?
+                .ToArray();
         }
 
         public Task<ConcurrentBag<SelectableItem>> GetItems()
         {
             var folders = FolderService.GetFolders(m_path);
-            var items = folders.Select(f => new SelectableItem(FileService.GetFileName(f), () => GetActions(f))).ToList();
+            var items = folders.Select(f => new SelectableItem(m_prefix + FileService.GetFileName(f), () => GetActions(f))).ToList();
             return Task.FromResult(new ConcurrentBag<SelectableItem>(items));
         }
 
@@ -30,9 +41,13 @@ namespace OpenRepo.Providers.Local
             var actions = new List<SelectableAction>
             {
                 new SelectableAction("Open", () => FolderService.OpenLocation(path)),
-                new SelectableAction("Solution", () => StartProgramService.StartProgramOfType("sln", path, true)), // TODO: Subconfig
                 new SelectableAction("Terminal", () => TerminalService.OpenTerminal(path)),
             };
+
+            foreach(var type in m_programTypesToStart)
+            {
+                actions.Add(new SelectableAction(type, () => StartProgramService.StartProgramOfType(type, path, true)));
+            }
 
             var hasGit = GitService.TryGetRemoteGitLocation(out string uri);
             if (hasGit)

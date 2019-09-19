@@ -11,7 +11,7 @@ namespace OpenRepo.ViewModels
 {
     public class MainViewModel : IViewModel
     {
-        private readonly TextHandler m_handler = new TextHandler(string.Empty, true);
+        private readonly TextHandler m_textHandler = new TextHandler(string.Empty, true);
         private readonly IndexTraverser m_traverser = new IndexTraverser(0, 1);
         private readonly List<IProvider> m_providers;
 
@@ -42,7 +42,7 @@ namespace OpenRepo.ViewModels
         {
             var output = new List<TextLine>
             {
-                new TextLine(m_handler.Text, ConsoleColor.White)
+                new TextLine(m_textHandler.Text, ConsoleColor.White)
             };
 
             for(var i = 0; i < m_currentItems.Count; i++)
@@ -67,27 +67,27 @@ namespace OpenRepo.ViewModels
             {
                 m_traverser.Handle(input);
             }
-            else if (m_handler.Handles(input))
+            else if (m_textHandler.Handles(input))
             {
-                m_handler.Handle(input);
+                m_textHandler.Handle(input);
                 UpdateCurrentItems();
             }
             else if(input.Key == ConsoleKey.Escape)
             {
-                m_handler.Clear();
+                m_textHandler.Clear();
                 UpdateCurrentItems();
             }
             else if(input.Key == ConsoleKey.Enter)
             {
-                Viewer.Push(new ActionSelectionViewModel(m_items[m_traverser.Current]));
+                Viewer.Push(new ActionSelectionViewModel(m_currentItems[m_traverser.Current]));
                 UpdateCurrentItems();
             }
         }
 
         private void UpdateCurrentItems()
         {
-            var text = m_handler.Text;
-            m_currentItems = string.IsNullOrEmpty(m_handler.Text) ? m_items : m_items.Where(r => text.Split().All(l => r.Title.Contains(l, StringComparison.OrdinalIgnoreCase))).ToList();
+            var text = m_textHandler.Text;
+            m_currentItems = string.IsNullOrEmpty(m_textHandler.Text) ? m_items : m_items.Where(r => text.Split().All(l => r.Title.Contains(l, StringComparison.OrdinalIgnoreCase))).ToList();
             m_traverser.Reset(0, m_currentItems.Count);
         }
     }

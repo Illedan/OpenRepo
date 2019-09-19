@@ -45,12 +45,12 @@ namespace OpenRepo.ViewModels
             }
             else if (input.Key == ConsoleKey.Enter)
             {
+                Viewer.Pop();
                 var action = m_actions[m_traverser.Current];
                 action.Action();
                 LogService.Log($"Ran action {action.Title} on {m_title}.");
-                Viewer.Pop();
             }
-            else if(input.Key == ConsoleKey.Escape)
+            else if(input.Key == ConsoleKey.Escape || input.Key == ConsoleKey.Backspace)
             {
                 Viewer.Pop();
             }
