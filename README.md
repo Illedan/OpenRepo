@@ -15,9 +15,16 @@ To run the alpha version, do:
 
 ## Configuration.yaml
 ```
+# Comment
 providerId:
     config1
     config2
+    
+providerId2:
+    config3
+    
+Local:
+    C:/Repos/ pt:sln pt:bat
 ```
 
 ProviderId is the id set in the `IProviderFactory` and config1/config2/etc.. is not depending on each other. Each line is sent to a fresh new provider of that type.
