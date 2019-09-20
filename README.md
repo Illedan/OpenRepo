@@ -3,6 +3,10 @@ Utility tool to navigate between local repositories
 
 This is currently an alpha version.
 
+
+
+## Run
+
 To run the alpha version, do:
 
 - :star:
@@ -12,6 +16,13 @@ To run the alpha version, do:
 - Create Configuration.yaml in the output folder. Check subsection about config further down.
 - `cd` into OpenRepo/bin/Debug/netcoreapp2.1/publish/
 - `dotnet run location/OpenRepo.dll`
+
+## Usages
+
+Write anything to filter your list of choices (only availiable at the start screen).
+Use arrows up/down to find your wanted choice, then press enter.
+
+You will then get a list of possible actions, which is given by the provider returning this choice, use arrows to select and enter to use this action on the current choice. See Providers futher down.
 
 ## Configuration.yaml
 ```
@@ -34,10 +45,22 @@ ProviderId is the id set in the `IProviderFactory` and config1/config2/etc.. is 
 
 ### EditConfig
 
-Adds a way to edit the configuration. In case you don't know where it is. 
-As for now you have to restart the program to have reset 
+Example:
+```
+EditConfig:
+    none
+```
+
+Adds a way to edit the configuration. Simply search for `Edit config` and you can edit, save and view an updated OpenRepo :rocket:
 
 ### Local
+
+Example:
+```
+Local:
+    C:/repos prefix:repos/ pt:sln ptt:md
+    /Users/Illedan/Projects/ prefix:projects/
+```
 
 Finds all folders inside a folder.
 
