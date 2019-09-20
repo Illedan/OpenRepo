@@ -71,7 +71,7 @@ Possible Parameters:
 Actions:
 - `Open` Opens the folder in explorer/finder
 - `Terminal` Opens the terminal at the target location 
-
+_ `Web` Opens a browser to the remote location of the repository. Only shows if this is a git repository.
 
 ## Contribute
 
