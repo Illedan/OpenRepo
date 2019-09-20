@@ -12,9 +12,9 @@ namespace OpenRepo.ViewModels
         private readonly IndexTraverser m_traverser = new IndexTraverser(0, 1);
         private SelectableAction[] m_actions;
         private string m_title;
-        public ActionSelectionViewModel(SelectableItem item)
+        public ActionSelectionViewModel(SelectableItem item, SelectableAction[] actions = null)
         {
-            m_actions = item.ActionsFactory();
+            m_actions = actions ?? item.ActionsFactory();
             m_title = item.Title;
             m_traverser.Reset(0, m_actions.Length);
         }

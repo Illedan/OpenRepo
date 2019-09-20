@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using OpenRepo.Contracts;
 using OpenRepo.Providers;
+using OpenRepo.Services;
 using OpenRepo.Util;
 using OpenRepo.View;
 
@@ -45,18 +46,33 @@ namespace OpenRepo.ViewModels
                 new TextLine(m_textHandler.Text, ConsoleColor.White)
             };
 
-            for(var i = 0; i < m_currentItems.Count; i++)
+            if(m_currentItems.Count > 0)
             {
-                var item = m_currentItems[i];
-                if(i == m_traverser.Current)
+                var tempTraverser = new IndexTraverser(m_traverser.Current, m_currentItems.Count);
+                var visibleItems = new List<SelectableItem>();
+                var max = m_currentItems.Count > 4 ? 11 : m_currentItems.Count;
+                var selected = max / 3;
+                for (var i = 0; i < selected; i++) tempTraverser.MovePrevious();
+                for(var i = 0; i < max; i++)
                 {
-                    output.Add(new TextLine($"> {item.Title}", ConsoleColor.Gray));
+                    visibleItems.Add(m_currentItems[tempTraverser.Current]);
+                    tempTraverser.MoveNext();
                 }
-                else
+
+                for (var i = 0; i < visibleItems.Count; i++)
                 {
-                    output.Add(new TextLine($"  {item.Title}", ConsoleColor.Gray));
+                    var item = visibleItems[i];
+                    if (i == selected)
+                    {
+                        output.Add(new TextLine($"> {item.Title}", ConsoleColor.Gray));
+                    }
+                    else
+                    {
+                        output.Add(new TextLine($"  {item.Title}", ConsoleColor.Gray));
+                    }
                 }
             }
+
 
             return output;
         }
@@ -77,9 +93,24 @@ namespace OpenRepo.ViewModels
                 m_textHandler.Clear();
                 UpdateCurrentItems();
             }
+            else if (input.Key == ConsoleKey.Tab)
+            {
+                _ = Program.Reset();
+            }
             else if(input.Key == ConsoleKey.Enter)
             {
-                Viewer.Push(new ActionSelectionViewModel(m_currentItems[m_traverser.Current]));
+                var item = m_currentItems[m_traverser.Current];
+                var actions = m_currentItems[m_traverser.Current].ActionsFactory();
+                if(actions.Length == 1)
+                {
+                    actions[0].Action();
+                }
+                else
+                {
+                    Viewer.Push(new ActionSelectionViewModel(item, actions));
+                }
+
+                m_textHandler.Clear();
                 UpdateCurrentItems();
             }
         }

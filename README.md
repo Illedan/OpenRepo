@@ -32,6 +32,11 @@ ProviderId is the id set in the `IProviderFactory` and config1/config2/etc.. is 
 
 ## Providers
 
+### EditConfig
+
+Adds a way to edit the configuration. In case you don't know where it is. 
+As for now you have to restart the program to have reset 
+
 ### Local
 
 Finds all folders inside a folder.

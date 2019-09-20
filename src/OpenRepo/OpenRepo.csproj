@@ -19,12 +19,10 @@
     <Folder Include="Providers\Local\" />
     <Folder Include="ViewModels\" />
     <Folder Include="Util\" />
+    <Folder Include="Providers\EditConfiguration\" />
   </ItemGroup>
   <ItemGroup>
     <None Update="DefaultConfiguration.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Configuration.yaml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

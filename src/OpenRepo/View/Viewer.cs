@@ -15,6 +15,12 @@ namespace OpenRepo.View
             Draw(viewModel.GetOutput());
         }
 
+        public static void Reset(IViewModel viewModel)
+        {
+            m_viewModelStack.Clear();
+            Push(viewModel);
+        }
+
         public static void Pop()
         {
             m_viewModelStack.TryPop(out _);
@@ -22,7 +28,6 @@ namespace OpenRepo.View
             if (!hasRenderer)
             {
                 Console.Clear();
-                Console.WriteLine("No renderer?"); //Shouldn't happend.
                 return;
             }
 
@@ -34,10 +39,22 @@ namespace OpenRepo.View
             while (true)
             {
                 var hasRenderer = m_viewModelStack.TryPeek(out var viewModel);
-                if (!hasRenderer) continue;
-                Draw(viewModel.GetOutput());
+                if (hasRenderer)
+                {
+                    Draw(viewModel.GetOutput());
+                }
+
                 var key = Console.ReadKey();
-                viewModel.HandleInput(key);
+
+                if (!hasRenderer)
+                {
+                    hasRenderer = m_viewModelStack.TryPeek(out viewModel);
+                }
+
+                if (hasRenderer)
+                {
+                    viewModel.HandleInput(key);
+                }
             }
         }
 

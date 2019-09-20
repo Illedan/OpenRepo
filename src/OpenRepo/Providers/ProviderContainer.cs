@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using OpenRepo.Contracts;
+using OpenRepo.Providers.EditConfiguration;
 using OpenRepo.Providers.Local;
 using OpenRepo.Services;
 
@@ -10,7 +11,8 @@ namespace OpenRepo.Providers
     {
         private static IProviderFactory[] m_factories =
         {
-            new LocalFactory()
+            new LocalFactory(),
+            new EditConfigurationProviderFactory()
         };
 
         public static List<IProvider> GetProviders(string configuration)
@@ -30,7 +32,7 @@ namespace OpenRepo.Providers
                 {
                     if (currentProviderFactory == null)
                     {
-                        LogService.Log($"Please provide a provider before you configure nothing?");
+                        LogService.Log($"Please provide a provider before you add configuration.");
                         continue;
                     }
 

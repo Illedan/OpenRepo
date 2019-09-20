@@ -14,6 +14,7 @@ namespace OpenRepo.Providers.Local
         private readonly string m_path;
         private readonly string m_prefix;
         private readonly string[] m_programTypesToStart;
+        private readonly string[] m_programTypesTopFolderToStart;
 
         public LocalProvider(string configuration)
         {
@@ -25,6 +26,11 @@ namespace OpenRepo.Providers.Local
 
             m_programTypesToStart = splittedConfig
                 .Where(s => s.StartsWith("pt:", StringComparison.CurrentCultureIgnoreCase))
+                .Select(s => s.Split(':').Last()) // Guard?
+                .ToArray();
+
+            m_programTypesTopFolderToStart = splittedConfig
+                .Where(s => s.StartsWith("ptt:", StringComparison.CurrentCultureIgnoreCase))
                 .Select(s => s.Split(':').Last()) // Guard?
                 .ToArray();
         }
@@ -45,6 +51,11 @@ namespace OpenRepo.Providers.Local
             };
 
             foreach(var type in m_programTypesToStart)
+            {
+                actions.Add(new SelectableAction(type, () => StartProgramService.StartProgramOfType(type, path, true)));
+            }
+
+            foreach (var type in m_programTypesTopFolderToStart)
             {
                 actions.Add(new SelectableAction(type, () => StartProgramService.StartProgramOfType(type, path, true)));
             }

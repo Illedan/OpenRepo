@@ -10,7 +10,8 @@ namespace OpenRepo.Util
         public void Reset(int index, int max)
         {
             m_max = max;
-            Current = index % max;
+            Current = index;
+            if (Current >= max || Current < 0) Current = 0;
         }
 
         public int Current { get; private set; }
