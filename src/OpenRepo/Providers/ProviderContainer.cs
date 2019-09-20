@@ -30,7 +30,7 @@ namespace OpenRepo.Providers
                 {
                     if (currentProviderFactory == null)
                     {
-                        LogService.Log($"Please provider a provider before you configure nothing?");
+                        LogService.Log($"Please provide a provider before you configure nothing?");
                         continue;
                     }
 
