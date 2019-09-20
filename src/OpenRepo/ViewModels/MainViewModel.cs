@@ -117,7 +117,8 @@ namespace OpenRepo.ViewModels
 
         private void UpdateCurrentItems()
         {
-            var previousSelected = m_currentItems[m_traverser.Current];
+            
+            var previousSelected = m_traverser.Current < m_currentItems.Count ? m_currentItems[m_traverser.Current] : null;
             var text = m_textHandler.Text;
             m_currentItems = string.IsNullOrEmpty(m_textHandler.Text) ? m_items : m_items.Where(r => text.Split().All(l => r.Title.Contains(l, StringComparison.OrdinalIgnoreCase))).ToList();
             m_traverser.Reset(m_currentItems.IndexOf(previousSelected), m_currentItems.Count);

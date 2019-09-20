@@ -6,7 +6,7 @@ namespace OpenRepo.Services
     public static class TerminalService
     {
         private static ShellConfigurator m_instance;
-        private static ShellConfigurator Instance
+        public static ShellConfigurator Instance
         {
             get
             {

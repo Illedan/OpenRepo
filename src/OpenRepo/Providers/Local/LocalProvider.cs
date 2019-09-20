@@ -60,10 +60,10 @@ namespace OpenRepo.Providers.Local
                 actions.Add(new SelectableAction(type, () => StartProgramService.StartProgramOfType(type, path, true)));
             }
 
-            var hasGit = GitService.TryGetRemoteGitLocation(out string uri);
+            var hasGit = GitService.TryGetRemoteGitLocation(path, out string uri);
             if (hasGit)
             {
-                actions.Add(new SelectableAction("Web", () => Process.Start(uri)));
+                actions.Add(new SelectableAction("Web", () => StartProgramService.StartProgram(uri)));
             }
 
             return actions.ToArray();
