@@ -73,6 +73,7 @@ Finds all folders inside a folder.
 Possible Parameters:
 - `prefix:customname` Applies `customname` in front of all folder from this source. Needed if you have many equal names. (Recommended to add a divider like / at the end)
 - `pt:programtype` Adds Actions to start extensions of programtype. Example is `pt:sln` which finds all solutions inside the repo. Logs if there is none, starts the first if one and gives a list to select if there are multiple.
+- `ptt:programtype` Adds Actions to start extensions of programtype. Example is `pt:sln` which finds all solutions inside the repo on the root level. Logs if there is none, starts the first if one and gives a list to select if there are multiple.
 
 Actions:
 - `Open` Opens the folder in explorer/finder
