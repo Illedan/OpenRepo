@@ -37,6 +37,8 @@ namespace OpenRepo
                 {
                     if (!File.Exists(m_configLocation))
                     {
+                        var dir = Path.GetDirectoryName(m_configLocation);
+                        Directory.CreateDirectory(dir);
                         File.WriteAllText(m_configLocation, DefaultConfig);
                     }
 

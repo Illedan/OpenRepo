@@ -19,7 +19,7 @@ namespace OpenRepo.Services
                 }
                 else
                 {
-                    return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                    return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/OpenRepo/";
                 }
                // string codeBase = Assembly.GetExecutingAssembly().CodeBase;
                // UriBuilder uri = new UriBuilder(codeBase);
