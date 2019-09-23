@@ -4,6 +4,20 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <PackAsTool>true</PackAsTool>
+    <ToolCommandName>openrepo</ToolCommandName>
+    <PackageOutputPath>./nupkg</PackageOutputPath>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackOnBuild>true</PackOnBuild>
+    <PackageVersion>0.0.8</PackageVersion>
+    <Authors>Erik Kvanli</Authors>
+    <Description>Utility tool to navigate between local repositories.
+Source: https://github.com/Illedan/OpenRepo</Description>
+    <NeutralLanguage>en</NeutralLanguage>
+    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <Owners>Erik Kvanli </Owners>
+    <PackageReleaseNotes>Initial release</PackageReleaseNotes>
+    <Title>OpenRepo</Title>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
     
   <ItemGroup>
@@ -12,18 +26,15 @@
   </ItemGroup>
     
   <ItemGroup>
-    <Folder Include="Services\" />
-    <Folder Include="Contracts\" />
-    <Folder Include="View\" />
-    <Folder Include="Providers\" />
-    <Folder Include="Providers\Local\" />
-    <Folder Include="ViewModels\" />
-    <Folder Include="Util\" />
-    <Folder Include="Providers\EditConfiguration\" />
+    <Folder Include="*" />
+  </ItemGroup>
+    
+  <ItemGroup>
+     <Content Include="cmd.bat" Link="cmd.bat" CopyToOutputDirectory="PreserveNewest" Pack="True" />
+     <Content Include="cmd.sh" Link="cmd.sh" CopyToOutputDirectory="PreserveNewest" Pack="True" />
   </ItemGroup>
   <ItemGroup>
     <None Update="DefaultConfiguration.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 </Project>

@@ -12,10 +12,10 @@ namespace OpenRepo.Providers.EditConfiguration
             return Task.FromResult(new ConcurrentBag<SelectableItem>
             {
                 new SelectableItem("Edit config",
-                () => new SelectableAction[]
-                {
-                    new SelectableAction("Edit", () => StartProgramService.StartProgram(ConfigurationService.ConfigurationPath))
-                })
+                    () => new SelectableAction[]
+                    {
+                        new SelectableAction("Edit", () => StartProgramService.StartProgram(ConfigurationService.ConfigurationPath))
+                    })
             });
         }
     }

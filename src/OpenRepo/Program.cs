@@ -9,13 +9,12 @@ namespace OpenRepo
 {
     class Program
     {
-        private const string DefaultConfig = "# Welcome to OpenRepo\n# Created by https://github.com/Illedan \nEditConfig:\n    none";
+        private const string DefaultConfig = "# Welcome to OpenRepo\n# Created by https://github.com/Illedan \n# Below you can view a sample configuration if you remove the #s. \n#Local:\n#    c:myPath/\n\n#Personal:\n#    nuget https://www.nuget.org";
         private static DateTime m_lastUpdated = DateTime.MinValue;
         private static string m_configLocation;
         static Task Main()
         {
             m_configLocation = ConfigurationService.ConfigurationPath;
-            Console.CursorVisible = false;
             CheckChanges();
             Viewer.Start();
             return new TaskCompletionSource<object>().Task;
@@ -23,6 +22,7 @@ namespace OpenRepo
 
         public static async Task Reset()
         {
+            LogService.Clear();
             Console.WriteLine("Loading..."); // Poor mans loading bar \o/
             var viewModel = new MainViewModel(File.ReadAllText(m_configLocation));
             await viewModel.Initialize();
@@ -31,12 +31,14 @@ namespace OpenRepo
 
         private static async void CheckChanges()
         {
-            try
+            while (true)
             {
-                while (true)
+                try
                 {
                     if (!File.Exists(m_configLocation))
                     {
+                        var dir = Path.GetDirectoryName(m_configLocation);
+                        Directory.CreateDirectory(dir);
                         File.WriteAllText(m_configLocation, DefaultConfig);
                     }
 
@@ -49,10 +51,10 @@ namespace OpenRepo
 
                     await Task.Delay(500);
                 }
-            }
-            catch(Exception e)
-            {
-                Console.Error.WriteLine("Check changes crashed: " + e.Message);
+                catch(Exception e)
+                {
+                    LogService.Log(e.Message);
+                }
             }
         }
     }

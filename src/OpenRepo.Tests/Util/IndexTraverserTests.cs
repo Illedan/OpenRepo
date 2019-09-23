@@ -48,5 +48,15 @@ namespace OpenRepo.Tests.Util
 
             cut.Current.Should().Be(1, "Because it is decreased");
         }
+
+        [Fact]
+        public void Reset_NoItemsToTraverse_NoCrash()
+        {
+            var cut = new IndexTraverser(1, 0);
+
+            cut.Reset(5, 0);
+
+            cut.Current.Should().Be(0, "Because it's the default value");
+        }
     }
 }

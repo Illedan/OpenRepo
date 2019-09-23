@@ -4,8 +4,8 @@ namespace OpenRepo.Services
 {
     public static class ConfigurationService
     {
-        private const string ConfigLocation = "Configuration.yaml";
+        private const string ConfigLocation = "OpenRepoConfiguration.yaml";
 
-        public static string ConfigurationPath => Path.Combine(AssemblyLocationService.AssemblyDirectory, ConfigLocation);
+        public static string ConfigurationPath => Path.Combine(StoragelocationService.StorageDirectory, ConfigLocation);
     }
 }

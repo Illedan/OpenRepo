@@ -6,6 +6,6 @@ Local:
 
 # More comments.
 
-# Next provider:
-EditConfig:
-    none
+Personal:
+    nuget https://www.nuget.org
+    cool_user https://www.github.com/Illedan

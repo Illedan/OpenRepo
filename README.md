@@ -31,33 +31,22 @@ Use arrows up/down to find your wanted choice, then press enter.
 You will then get a list of possible actions, which is given by the provider returning this choice, use arrows to select and enter to use this action on the current choice. See Providers futher down.
 
 ## Configuration.yaml
+Example:
 ```
-# Comment
-providerId:
-    config1
-    config2
-    
-providerId2:
-    config3
-    
+# Welcome to OpenRepo
+# Created by https://github.com/Illedan 
+# Add this path. Where C:/Repos/ is replaced with your repo location
 Local:
     C:/Repos/ pt:sln pt:bat
+
+Personal:
+    nuget https://www.nuget.org
 ```
 
 ProviderId is the id set in the `IProviderFactory` and config1/config2/etc.. is not depending on each other. Each line is sent to a fresh new provider of that type.
 
 
 ## Providers
-
-### EditConfig
-
-Example:
-```
-EditConfig:
-    none
-```
-
-Adds a way to edit the configuration. Simply search for `Edit config` and you can edit, save and view an updated OpenRepo :rocket:
 
 ### Local
 
@@ -79,6 +68,18 @@ Actions:
 - `Open` Opens the folder in explorer/finder
 - `Terminal` Opens the terminal at the target location 
 _ `Web` Opens a browser to the remote location of the repository. Only shows if this is a git repository.
+
+### Personal
+
+Here you can add a key + a value to link to. As the example here:
+```
+Personal:
+    nuget https://www.nuget.org
+    cool_user https://www.github.com/Illedan
+```
+Nuget would send the user to nuget.org and cool_user to Illedan's github profile.
+This could also be folders in your file system, script, whatever you like :) 
+
 
 ## Contribute
 
