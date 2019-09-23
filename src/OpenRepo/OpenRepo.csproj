@@ -8,7 +8,7 @@
     <PackageOutputPath>./nupkg</PackageOutputPath>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackOnBuild>true</PackOnBuild>
-    <PackageVersion>0.0.7</PackageVersion>
+    <PackageVersion>0.0.8</PackageVersion>
     <Authors>Erik Kvanli</Authors>
     <Description>Utility tool to navigate between local repositories.
 Source: https://github.com/Illedan/OpenRepo</Description>
@@ -30,7 +30,7 @@ Source: https://github.com/Illedan/OpenRepo</Description>
   </ItemGroup>
     
   <ItemGroup>
-     <Content Include="cmd.bat" Link="cmd.bat" CopyToOutputDirectory="PreserveNewest" Pack="True"/>
+     <Content Include="cmd.bat" Link="cmd.bat" CopyToOutputDirectory="PreserveNewest" Pack="True" />
      <Content Include="cmd.sh" Link="cmd.sh" CopyToOutputDirectory="PreserveNewest" Pack="True" />
   </ItemGroup>
   <ItemGroup>
