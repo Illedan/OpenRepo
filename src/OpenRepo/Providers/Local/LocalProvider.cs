@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using OpenRepo.Contracts;
@@ -20,18 +21,23 @@ namespace OpenRepo.Providers.Local
         {
             var splittedConfig = configuration.Trim().Split();
             m_path = splittedConfig[0];
+            if (!Directory.Exists(m_path))
+            {
+                throw new Exception("Folder not found: " + m_path);
+            }
+
             m_prefix = splittedConfig
                 .FirstOrDefault(s => s.StartsWith("prefix:", StringComparison.CurrentCultureIgnoreCase))
                 ?.Split(':').Last() ?? string.Empty;
 
             m_programTypesToStart = splittedConfig
                 .Where(s => s.StartsWith("pt:", StringComparison.CurrentCultureIgnoreCase))
-                .Select(s => s.Split(':').Last()) // Guard?
+                .Select(s => s.Split(':').Last()) 
                 .ToArray();
 
             m_programTypesTopFolderToStart = splittedConfig
                 .Where(s => s.StartsWith("ptt:", StringComparison.CurrentCultureIgnoreCase))
-                .Select(s => s.Split(':').Last()) // Guard?
+                .Select(s => s.Split(':').Last()) 
                 .ToArray();
         }
 

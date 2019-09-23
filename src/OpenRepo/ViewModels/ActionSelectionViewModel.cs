@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using OpenRepo.Contracts;
-using OpenRepo.Services;
 using OpenRepo.Util;
 using OpenRepo.View;
 
@@ -48,7 +47,6 @@ namespace OpenRepo.ViewModels
                 Viewer.Pop();
                 var action = m_actions[m_traverser.Current];
                 action.Action();
-                LogService.Log($"Ran action {action.Title} on {m_title}.");
             }
             else if(input.Key == ConsoleKey.Escape || input.Key == ConsoleKey.Backspace)
             {

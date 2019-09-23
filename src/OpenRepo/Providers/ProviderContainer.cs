@@ -4,6 +4,7 @@ using System.Linq;
 using OpenRepo.Contracts;
 using OpenRepo.Providers.EditConfiguration;
 using OpenRepo.Providers.Local;
+using OpenRepo.Providers.Personal;
 using OpenRepo.Services;
 
 namespace OpenRepo.Providers
@@ -13,12 +14,12 @@ namespace OpenRepo.Providers
         private static IProviderFactory[] m_factories =
         {
             new LocalFactory(),
-            new EditConfigurationProviderFactory()
+            new PersonalContentProviderFactory()
         };
 
         public static List<IProvider> GetProviders(string configuration)
         {
-            var providers = new List<IProvider>();
+            var providers = new List<IProvider> { new EditConfigurationProviderFactory().GetProvider(string.Empty) };
             var lines = configuration.Split("\n");
             IProviderFactory currentProviderFactory = null;
 
@@ -26,7 +27,7 @@ namespace OpenRepo.Providers
             {
                 try
                 {
-                    if (line.Trim().StartsWith('#'))
+                    if (line.Trim().StartsWith('#') || string.IsNullOrEmpty(line.Trim()))
                     {
                         continue; // Lines starting with # is a comment.
                     }
@@ -53,7 +54,7 @@ namespace OpenRepo.Providers
                 }
                 catch (Exception e)
                 {
-                    LogService.Log("Line failed: " + line + " " + e.Message);
+                    LogService.Log("Config Error: <<" + line + ">> " + e.Message);
                 }
             }
 

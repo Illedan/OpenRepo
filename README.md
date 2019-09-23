@@ -41,16 +41,6 @@ ProviderId is the id set in the `IProviderFactory` and config1/config2/etc.. is 
 
 ## Providers
 
-### EditConfig
-
-Example:
-```
-EditConfig:
-    none
-```
-
-Adds a way to edit the configuration. Simply search for `Edit config` and you can edit, save and view an updated OpenRepo :rocket:
-
 ### Local
 
 Example:
@@ -70,6 +60,18 @@ Actions:
 - `Open` Opens the folder in explorer/finder
 - `Terminal` Opens the terminal at the target location 
 _ `Web` Opens a browser to the remote location of the repository. Only shows if this is a git repository.
+
+### Personal
+
+Here you can add a key + a value to link to. As the example here:
+```
+Personal:
+    nuget https://www.nuget.org
+    cool_user https://www.github.com/Illedan
+```
+Nuget would send the user to nuget.org and cool_user to Illedan's github profile.
+This could also be folders in your file system, script, whatever you like :) 
+
 
 ## Contribute
 

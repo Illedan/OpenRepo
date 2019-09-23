@@ -15,7 +15,6 @@ namespace OpenRepo
         static Task Main()
         {
             m_configLocation = ConfigurationService.ConfigurationPath;
-            Console.CursorVisible = false;
             CheckChanges();
             Viewer.Start();
             return new TaskCompletionSource<object>().Task;
@@ -23,6 +22,7 @@ namespace OpenRepo
 
         public static async Task Reset()
         {
+            LogService.Clear();
             Console.WriteLine("Loading..."); // Poor mans loading bar \o/
             var viewModel = new MainViewModel(File.ReadAllText(m_configLocation));
             await viewModel.Initialize();
@@ -31,9 +31,9 @@ namespace OpenRepo
 
         private static async void CheckChanges()
         {
-            try
+            while (true)
             {
-                while (true)
+                try
                 {
                     if (!File.Exists(m_configLocation))
                     {
@@ -51,10 +51,10 @@ namespace OpenRepo
 
                     await Task.Delay(500);
                 }
-            }
-            catch(Exception e)
-            {
-                Console.Error.WriteLine("Check changes crashed: " + e.Message);
+                catch(Exception e)
+                {
+                    LogService.Log(e.Message);
+                }
             }
         }
     }

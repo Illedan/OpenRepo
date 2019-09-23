@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -46,6 +47,13 @@ namespace OpenRepo.ViewModels
                 new TextLine(m_textHandler.Text, ConsoleColor.White)
             };
 
+            if (!string.IsNullOrEmpty(LogService.Message))
+            {
+                output.Add(new TextLine(string.Empty, ConsoleColor.Red));
+                output.Add(new TextLine(LogService.Message, ConsoleColor.Red));
+                output.Add(new TextLine(string.Empty, ConsoleColor.Red));
+            }
+
             if(m_currentItems.Count > 0)
             {
                 var tempTraverser = new IndexTraverser(m_traverser.Current, m_currentItems.Count);
@@ -92,9 +100,11 @@ namespace OpenRepo.ViewModels
             {
                 m_textHandler.Clear();
                 UpdateCurrentItems();
+                LogService.Clear();
             }
             else if (input.Key == ConsoleKey.Tab)
             {
+                LogService.Clear();
                 _ = Program.Reset();
             }
             else if(input.Key == ConsoleKey.Enter && m_currentItems.Count > 0)
@@ -112,13 +122,14 @@ namespace OpenRepo.ViewModels
 
                 m_textHandler.Clear();
                 UpdateCurrentItems();
+                LogService.Clear();
             }
         }
 
         private void UpdateCurrentItems()
         {
             
-            var previousSelected = m_traverser.Current < m_currentItems.Count ? m_currentItems[m_traverser.Current] : null;
+            var previousSelected = m_traverser.Current < m_currentItems.Count && m_traverser.Current >= 0 ? m_currentItems[m_traverser.Current] : null;
             var text = m_textHandler.Text;
             m_currentItems = string.IsNullOrEmpty(m_textHandler.Text) ? m_items : m_items.Where(r => text.Split().All(l => r.Title.Contains(l, StringComparison.OrdinalIgnoreCase))).ToList();
             m_traverser.Reset(m_currentItems.IndexOf(previousSelected), m_currentItems.Count);
