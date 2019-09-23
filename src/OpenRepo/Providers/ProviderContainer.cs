@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using OpenRepo.Contracts;
 using OpenRepo.Providers.EditConfiguration;
@@ -23,29 +24,36 @@ namespace OpenRepo.Providers
 
             foreach(var line in lines)
             {
-                if (line.Trim().StartsWith('#'))
+                try
                 {
-                    continue; // Lines starting with # is a comment.
-                }
-
-                if(line.StartsWith(' ') || line.StartsWith('\t'))
-                {
-                    if (currentProviderFactory == null)
+                    if (line.Trim().StartsWith('#'))
                     {
-                        LogService.Log($"Please provide a provider before you add configuration.");
-                        continue;
+                        continue; // Lines starting with # is a comment.
                     }
 
-                    providers.Add(currentProviderFactory.GetProvider(line.Trim()));
-                }
-                else if(!string.IsNullOrEmpty(line.Trim()))
-                {
-                    var providerId = line.Replace(":", " ").Trim();
-                    currentProviderFactory = m_factories.FirstOrDefault(f => f.Id == providerId);
-                    if (currentProviderFactory == null)
+                    if(line.StartsWith(' ') || line.StartsWith('\t'))
                     {
-                        LogService.Log($"Can't find provider with id {providerId}");
+                        if (currentProviderFactory == null)
+                        {
+                            LogService.Log($"Please provide a provider before you add configuration.");
+                            continue;
+                        }
+
+                        providers.Add(currentProviderFactory.GetProvider(line.Trim()));
                     }
+                    else if(!string.IsNullOrEmpty(line.Trim()))
+                    {
+                        var providerId = line.Replace(":", " ").Trim();
+                        currentProviderFactory = m_factories.FirstOrDefault(f => f.Id == providerId);
+                        if (currentProviderFactory == null)
+                        {
+                            LogService.Log($"Can't find provider with id {providerId}");
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    LogService.Log("Line failed: " + line + " " + e.Message);
                 }
             }
 

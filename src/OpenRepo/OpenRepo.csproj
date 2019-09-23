@@ -8,7 +8,7 @@
     <PackageOutputPath>./nupkg</PackageOutputPath>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackOnBuild>true</PackOnBuild>
-    <PackageVersion>0.0.3</PackageVersion>
+    <PackageVersion>0.0.5</PackageVersion>
     <Authors>Erik Kvanli</Authors>
     <Description>Utility tool to navigate between local repositories.
 Source: https://github.com/Illedan/OpenRepo</Description>
@@ -26,14 +26,12 @@ Source: https://github.com/Illedan/OpenRepo</Description>
   </ItemGroup>
     
   <ItemGroup>
-    <Folder Include="Services\" />
-    <Folder Include="Contracts\" />
-    <Folder Include="View\" />
-    <Folder Include="Providers\" />
-    <Folder Include="Providers\Local\" />
-    <Folder Include="ViewModels\" />
-    <Folder Include="Util\" />
-    <Folder Include="Providers\EditConfiguration\" />
+    <Folder Include="*" />
+  </ItemGroup>
+    
+  <ItemGroup>
+     <Content Include="cmd.bat" Link="cmd.bat" CopyToOutputDirectory="PreserveNewest" />
+     <Content Include="cmd.sh" Link="cmd.sh" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
   <ItemGroup>
     <None Update="DefaultConfiguration.txt">

@@ -26,14 +26,12 @@ You will then get a list of possible actions, which is given by the provider ret
 
 ## Configuration.yaml
 ```
-# Comment
-providerId:
-    config1
-    config2
+# Welcome to OpenRepo
+# Created by https://github.com/Illedan 
+EditConfig:
+    none
     
-providerId2:
-    config3
-    
+# Add this path. Where C:/Repos/ is replaced with your repo location
 Local:
     C:/Repos/ pt:sln pt:bat
 ```

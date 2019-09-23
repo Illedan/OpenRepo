@@ -97,7 +97,7 @@ namespace OpenRepo.ViewModels
             {
                 _ = Program.Reset();
             }
-            else if(input.Key == ConsoleKey.Enter)
+            else if(input.Key == ConsoleKey.Enter && m_currentItems.Count > 0)
             {
                 var item = m_currentItems[m_traverser.Current];
                 var actions = m_currentItems[m_traverser.Current].ActionsFactory();
