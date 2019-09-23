@@ -109,20 +109,27 @@ namespace OpenRepo.ViewModels
             }
             else if(input.Key == ConsoleKey.Enter && m_currentItems.Count > 0)
             {
-                var item = m_currentItems[m_traverser.Current];
-                var actions = m_currentItems[m_traverser.Current].ActionsFactory();
-                if(actions.Length == 1)
+                try
                 {
-                    actions[0].Action();
-                }
-                else
-                {
-                    Viewer.Push(new ActionSelectionViewModel(item, actions));
-                }
+                    var item = m_currentItems[m_traverser.Current];
+                    var actions = m_currentItems[m_traverser.Current].ActionsFactory();
+                    if(actions.Length == 1)
+                    {
+                        actions[0].Action();
+                    }
+                    else
+                    {
+                        Viewer.Push(new ActionSelectionViewModel(item, actions));
+                    }
 
-                m_textHandler.Clear();
-                UpdateCurrentItems();
-                LogService.Clear();
+                    m_textHandler.Clear();
+                    UpdateCurrentItems();
+                    LogService.Clear();
+                }
+                catch (Exception e)
+                {
+                    LogService.Log(e.Message);
+                }
             }
         }
 
