@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Reflection;
 using ToolBox.Bridge;
 using ToolBox.Platform;
 
@@ -11,15 +13,29 @@ namespace OpenRepo.Services
         {
             get
             {
-                if(m_instance == null)
+                if (m_instance == null)
                 {
-                    File.WriteAllText(Path.Combine(AssemblyLocationService.AssemblyDirectory, "cmd.bat"), CmdBat);
-                    File.WriteAllText(Path.Combine(AssemblyLocationService.AssemblyDirectory, "cmd.sh"), CmdSh);
-                    var bridgeSystem = OS.GetCurrent() == "win" ? BridgeSystem.Bat : BridgeSystem.Bash;
+                    var bridgeSystem = OS.IsWin() ? BridgeSystem.Bat : BridgeSystem.Bash;
                     m_instance = new ShellConfigurator(bridgeSystem);
+
+                   // File.WriteAllText(Path.Combine(AssemblyDirectory, "cmd.bat"), CmdBat);
+                   // var shPath = Path.Combine(AssemblyDirectory, "cmd.sh");
+                   // File.WriteAllText(shPath, CmdSh);
+                   // m_instance.Term("chmod +x " + shPath, Output.Hidden);
                 }
 
                 return m_instance;
+            }
+        }
+
+        private static string AssemblyDirectory
+        {
+            get
+            {
+                string codeBase = Assembly.GetExecutingAssembly().CodeBase;
+                UriBuilder uri = new UriBuilder(codeBase);
+                string path = Uri.UnescapeDataString(uri.Path);
+                return Path.GetDirectoryName(path);
             }
         }
 
@@ -28,6 +44,11 @@ namespace OpenRepo.Services
             Instance.Term("cd " + path, Output.External);
         }
 
+        private static string GetFileName()
+        {
+            if (OS.IsWin()) return "cmd.exe";
+            return "/bin/bash";
+        }
 
         private const string CmdBat = @"
 echo off

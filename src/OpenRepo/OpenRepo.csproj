@@ -8,7 +8,7 @@
     <PackageOutputPath>./nupkg</PackageOutputPath>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackOnBuild>true</PackOnBuild>
-    <PackageVersion>0.0.2</PackageVersion>
+    <PackageVersion>0.0.3</PackageVersion>
     <Authors>Erik Kvanli</Authors>
     <Description>Utility tool to navigate between local repositories.
 Source: https://github.com/Illedan/OpenRepo</Description>
@@ -37,27 +37,14 @@ Source: https://github.com/Illedan/OpenRepo</Description>
   </ItemGroup>
   <ItemGroup>
     <None Update="DefaultConfiguration.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="$(NuGetPackageRoot)dein.toolbox/1.5.3/contentFiles/any/any/cmd.sh" Condition="Exists('$(NuGetPackageRoot)dein.toolbox/1.5.3/contentFiles/any/any/cmd.sh')">
-      <NuGetPackageId>dein.ToolBox</NuGetPackageId>
-      <NuGetPackageVersion>1.5.3</NuGetPackageVersion>
-      <NuGetItemType>None</NuGetItemType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <TargetPath>cmd.sh</TargetPath>
-      <Private>True</Private>
-      <Link>cmd.sh</Link>
-    </EmbeddedResource>
-    <EmbeddedResource Include="$(NuGetPackageRoot)dein.toolbox/1.5.3/contentFiles/any/any/cmd.bat" Condition="Exists('$(NuGetPackageRoot)dein.toolbox/1.5.3/contentFiles/any/any/cmd.bat')">
-      <NuGetPackageId>dein.ToolBox</NuGetPackageId>
-      <NuGetPackageVersion>1.5.3</NuGetPackageVersion>
-      <NuGetItemType>None</NuGetItemType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <TargetPath>cmd.bat</TargetPath>
-      <Private>True</Private>
-      <Link>cmd.bat</Link>
-    </EmbeddedResource>
+            <None Update="cmd.bat">
+              <Pack>true</Pack>
+              <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+            </None>
+            <None Update="cmd.sh">
+              <Pack>true</Pack>
+              <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+            </None>
   </ItemGroup>
 </Project>
