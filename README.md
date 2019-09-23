@@ -25,15 +25,16 @@ Use arrows up/down to find your wanted choice, then press enter.
 You will then get a list of possible actions, which is given by the provider returning this choice, use arrows to select and enter to use this action on the current choice. See Providers futher down.
 
 ## Configuration.yaml
+Example:
 ```
 # Welcome to OpenRepo
 # Created by https://github.com/Illedan 
-EditConfig:
-    none
-    
 # Add this path. Where C:/Repos/ is replaced with your repo location
 Local:
     C:/Repos/ pt:sln pt:bat
+
+Personal:
+    nuget https://www.nuget.org
 ```
 
 ProviderId is the id set in the `IProviderFactory` and config1/config2/etc.. is not depending on each other. Each line is sent to a fresh new provider of that type.

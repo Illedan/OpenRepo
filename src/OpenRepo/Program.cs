@@ -9,7 +9,7 @@ namespace OpenRepo
 {
     class Program
     {
-        private const string DefaultConfig = "# Welcome to OpenRepo\n# Created by https://github.com/Illedan \nEditConfig:\n    none";
+        private const string DefaultConfig = "# Welcome to OpenRepo\n# Created by https://github.com/Illedan \n# Below you can view a sample configuration if you remove the #s. \n#Local:\n#    c:myPath/\n\n#Personal:\n#    nuget https://www.nuget.org";
         private static DateTime m_lastUpdated = DateTime.MinValue;
         private static string m_configLocation;
         static Task Main()
