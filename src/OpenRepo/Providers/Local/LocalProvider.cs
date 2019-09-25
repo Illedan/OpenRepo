@@ -19,7 +19,7 @@ namespace OpenRepo.Providers.Local
 
         public LocalProvider(string configuration)
         {
-            var splittedConfig = configuration.Trim().Split();
+            var splittedConfig = configuration.Trim().SplitPath();
             m_path = splittedConfig[0];
             if (!Directory.Exists(m_path))
             {
