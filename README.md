@@ -1,21 +1,27 @@
 # OpenRepo
 Utility tool to navigate between local repositories
 
-This is currently an alpha version.
 
+![nuget](https://img.shields.io/nuget/v/OpenRepo)
 
+## Installation
 
-## Run
+- Run `dotnet tool install --global OpenRepo`
+- Use the command `openrepo`
+- Press Enter to edit config for your needs. For example add:
+```
+Local:
+    /Users/username/Projects/
+```
+- Save and go back to the terminal to continue usage.
 
-To run the alpha version, do:
+## Run from project
 
-- :star:
 - Clone
 - `cd` into src
 - Run `dotnet publish`
-- Create Configuration.yaml in the output folder. Check subsection about config further down.
 - `cd` into OpenRepo/bin/Debug/netcoreapp2.1/publish/
-- `dotnet run location/OpenRepo.dll`
+- `dotnet run OpenRepo.dll`
 
 ## Usages
 
@@ -57,6 +63,7 @@ Finds all folders inside a folder.
 Possible Parameters:
 - `prefix:customname` Applies `customname` in front of all folder from this source. Needed if you have many equal names. (Recommended to add a divider like / at the end)
 - `pt:programtype` Adds Actions to start extensions of programtype. Example is `pt:sln` which finds all solutions inside the repo. Logs if there is none, starts the first if one and gives a list to select if there are multiple.
+- `ptt:programtype` Adds Actions to start extensions of programtype. Example is `pt:sln` which finds all solutions inside the repo on the root level. Logs if there is none, starts the first if one and gives a list to select if there are multiple.
 
 Actions:
 - `Open` Opens the folder in explorer/finder

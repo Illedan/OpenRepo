@@ -28,6 +28,11 @@ Source: https://github.com/Illedan/OpenRepo</Description>
   <ItemGroup>
     <Folder Include="*" />
   </ItemGroup>
+    
+  <ItemGroup>
+     <Content Include="cmd.bat" Link="cmd.bat" CopyToOutputDirectory="PreserveNewest" Pack="True" />
+     <Content Include="cmd.sh" Link="cmd.sh" CopyToOutputDirectory="PreserveNewest" Pack="True" />
+  </ItemGroup>
  
     
   <ItemGroup>
