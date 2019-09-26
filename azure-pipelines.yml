@@ -22,6 +22,13 @@ steps:
     version: '3.0.100-rc1-014190'
     includePreviewVersions: true
 
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet globaljson'
+  inputs:
+    command: custom
+    custom: new
+    arguments: 'globaljson --sdk-version 3.0.100-rc1-014190'
+
 - task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
