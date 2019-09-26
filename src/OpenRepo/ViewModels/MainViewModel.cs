@@ -44,7 +44,7 @@ namespace OpenRepo.ViewModels
         {
             var output = new List<TextLine>
             {
-                new TextLine(m_textHandler.Text, ConsoleColor.White)
+                new TextLine(string.IsNullOrEmpty(m_textHandler.Text) ? ("Version: " + OpenRepoVersionService.GetCurrentVersion()) : m_textHandler.Text, ConsoleColor.White)
             };
 
             if (!string.IsNullOrEmpty(LogService.Message))

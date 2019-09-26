@@ -27,7 +27,5 @@ namespace OpenRepo.Services
         {
             Instance.Term("cd " + path, Output.External);
         }
-
-        
     }
 }
