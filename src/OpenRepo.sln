@@ -5,7 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenRepo", "OpenRepo\OpenRe
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Other Files", "Other Files", "{7F9C6899-91E0-4518-8459-31C290DEDCCC}"
 	ProjectSection(SolutionItems) = preProject
-		..\LICENSE = ..\LICENSE
 		..\README.md = ..\README.md
 		..\.gitignore = ..\.gitignore
 	EndProjectSection

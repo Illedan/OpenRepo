@@ -26,11 +26,11 @@ namespace OpenRepo.ViewModels
                 var action = m_actions[i];
                 if(m_traverser.Current == i)
                 {
-                    output.Add(new TextLine($"> {action.Title}", ConsoleColor.Red)); 
+                    output.Add(new TextLine($"> ({i+1}) {action.Title}", ConsoleColor.Red)); 
                 }
                 else
                 {
-                    output.Add(new TextLine($"  {action.Title}", ConsoleColor.Gray));
+                    output.Add(new TextLine($"  ({i+1}) {action.Title}", ConsoleColor.Gray));
                 }
             }
             return output;
@@ -44,14 +44,25 @@ namespace OpenRepo.ViewModels
             }
             else if (input.Key == ConsoleKey.Enter)
             {
-                Viewer.Pop();
-                var action = m_actions[m_traverser.Current];
-                action.Action();
+                SelectAction(m_traverser.Current);
             }
             else if(input.Key == ConsoleKey.Escape || input.Key == ConsoleKey.Backspace)
             {
                 Viewer.Pop();
             }
+            else if (char.IsNumber(input.KeyChar))
+            {
+                var isNumber = int.TryParse(input.KeyChar + "", out var index);
+                if (!isNumber || index > m_actions.Length || index <= 0) return;
+                SelectAction(index - 1);
+            }
+        }
+
+        private void SelectAction(int index)
+        {
+            Viewer.Pop();
+            var action = m_actions[index];
+            action.Action();
         }
     }
 }

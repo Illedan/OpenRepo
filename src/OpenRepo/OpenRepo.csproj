@@ -8,12 +8,12 @@
     <PackageOutputPath>./nupkg</PackageOutputPath>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackOnBuild>true</PackOnBuild>
-    <PackageVersion>0.0.10</PackageVersion>
+    <PackageVersion>0.0.11</PackageVersion>
     <Authors>Erik Kvanli</Authors>
     <Description>Utility tool to navigate between local repositories.
 Source: https://github.com/Illedan/OpenRepo</Description>
     <NeutralLanguage>en</NeutralLanguage>
-    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <Owners>Erik Kvanli </Owners>
     <PackageReleaseNotes>Initial release</PackageReleaseNotes>
     <Title>OpenRepo</Title>
@@ -28,15 +28,15 @@ Source: https://github.com/Illedan/OpenRepo</Description>
   <ItemGroup>
     <Folder Include="*" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="LICENSE.txt" Pack="true" PackagePath="$(PackageLicenseFile)" />
+  </ItemGroup>
     
   <ItemGroup>
      <Content Include="cmd.bat" Link="cmd.bat" CopyToOutputDirectory="PreserveNewest" Pack="True" />
      <Content Include="cmd.sh" Link="cmd.sh" CopyToOutputDirectory="PreserveNewest" Pack="True" />
   </ItemGroup>
- 
-    
   <ItemGroup>
-    
     <None Update="DefaultConfiguration.txt">
     </None>
   </ItemGroup>
