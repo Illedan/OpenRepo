@@ -9,7 +9,7 @@ trigger:
     - '*'
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'windows-2019'
 
 variables:
   solution: '**/*.sln'
@@ -17,6 +17,20 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+- task: UseDotNet@2
+  displayName: 'Install .net core 3.0'
+  inputs:
+    packageType: 'sdk'
+    version: '3.0.100-rc1-014190'
+    includePreviewVersions: true
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet globaljson'
+  inputs:
+    command: custom
+    custom: new
+    arguments: 'globaljson --sdk-version 3.0.100-rc1-014190'
+
 - task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
