@@ -1,5 +1,5 @@
 # OpenRepo
-Utility tool to navigate between local repositories
+Terminal based utility tool to navigate between local repositories
 
 
 [![Build Status](https://dev.azure.com/ekv0632/OpenRepo/_apis/build/status/Illedan.OpenRepo?branchName=master)](https://dev.azure.com/ekv0632/OpenRepo/_build/latest?definitionId=1&branchName=master) ![nuget](https://img.shields.io/nuget/v/OpenRepo) 
@@ -63,12 +63,12 @@ Finds all folders inside a folder.
 Possible Parameters:
 - `prefix:customname` Applies `customname` in front of all folder from this source. Needed if you have many equal names. (Recommended to add a divider like / at the end)
 - `pt:programtype` Adds Actions to start extensions of programtype. Example is `pt:sln` which finds all solutions inside the repo. Logs if there is none, starts the first if one and gives a list to select if there are multiple.
-- `ptt:programtype` Adds Actions to start extensions of programtype. Example is `pt:sln` which finds all solutions inside the repo on the root level. Logs if there is none, starts the first if one and gives a list to select if there are multiple.
+- `ptt:programtype` Adds Actions to start extensions of programtype. Example is `ptt:md` which finds all solutions inside the repo on the root level. Logs if there is none, starts the first if one and gives a list to select if there are multiple.
 
 Actions:
 - `Open` Opens the folder in explorer/finder
-- `Terminal` Opens the terminal at the target location 
-_ `Web` Opens a browser to the remote location of the repository. Only shows if this is a git repository.
+- `Terminal` Opens the terminal at the target location
+- `Web` Opens a browser to the remote location of the repository. Only shows if this is a git repository.
 
 ### Personal
 
