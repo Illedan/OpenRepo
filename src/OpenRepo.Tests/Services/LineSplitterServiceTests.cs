@@ -4,7 +4,7 @@ using Xunit;
 
 namespace OpenRepo.Tests.Services
 {
-    public class LineSplitterService
+    public class LineSplitterServiceTests
     {
         [Fact]
         public void OnlySplaces_NormalSplitIsFine()
@@ -26,7 +26,7 @@ namespace OpenRepo.Tests.Services
 
             var splitted = line.SplitPath();
 
-            Assert.Equal(0, splitted.Length);
+            Assert.Empty(splitted);
         }
 
         [Fact]
@@ -37,7 +37,7 @@ namespace OpenRepo.Tests.Services
             var splitted = line.SplitPath();
 
             Assert.Equal("abc", splitted[0]);
-            Assert.Equal(1, splitted.Length);
+            Assert.Single(splitted);
         }
 
         [Fact]
