@@ -99,6 +99,7 @@ else
 }
 ```
 This script will trigger when the ```F1``` key is pressed
+
 Finally run the AutoHotkey script by double clicking it. 
 
 Openrepo should now come in to view when pressing F1
