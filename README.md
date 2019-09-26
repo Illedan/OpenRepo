@@ -81,6 +81,28 @@ Personal:
 Nuget would send the user to nuget.org and cool_user to Illedan's github profile.
 This could also be folders in your file system, script, whatever you like :) 
 
+## Running on Windows with AutoHotkey
+One approach to working with openrepo on a windows machine is to use an AutoHotkey script to fire it an if it is already running, just bring it in to view.
+First, you will need to install AutoHotkey https://www.autohotkey.com/.
+Go to your desktop and right click, new, AutoHotkey Script.
+
+```
+F1::
+IfWinExist C:\Users\<USER>\.dotnet\tools\OpenRepo.exe
+{
+  WinActivate, C:\Users\<USER>\.dotnet\tools\OpenRepo.exe
+}
+else
+{
+    run, OpenRepo
+    WinActivate, C:\Users\<USER>I\.dotnet\tools\OpenRepo.exe
+}
+```
+This script will trigger when the ```F1``` key is pressed
+Finally run the AutoHotkey script by double clicking it. 
+
+Openrepo should now come in to view when pressing F1
+
 
 ## Contribute
 
