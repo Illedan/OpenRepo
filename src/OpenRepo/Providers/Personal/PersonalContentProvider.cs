@@ -12,7 +12,7 @@ namespace OpenRepo.Providers.Personal
 
         public PersonalContentProvider(string configuration)
         {
-            var items = configuration.Split();
+            var items = configuration.SplitPath();
             if(items.Length < 2)
             {
                 throw new Exception("Personal should have 2 properties with space between: name value");

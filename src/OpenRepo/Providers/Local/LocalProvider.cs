@@ -19,7 +19,7 @@ namespace OpenRepo.Providers.Local
 
         public LocalProvider(string configuration)
         {
-            var splittedConfig = configuration.Trim().Split();
+            var splittedConfig = configuration.Trim().SplitPath();
             m_path = splittedConfig[0];
             if (!Directory.Exists(m_path))
             {
@@ -56,7 +56,13 @@ namespace OpenRepo.Providers.Local
                 new SelectableAction("Terminal", () => TerminalService.OpenTerminal(path)),
             };
 
-            foreach(var type in m_programTypesToStart)
+            var hasGit = GitService.TryGetRemoteGitLocation(path, out string uri);
+            if (hasGit)
+            {
+                actions.Add(new SelectableAction("Web", () => StartProgramService.StartProgram(uri)));
+            }
+
+            foreach (var type in m_programTypesToStart)
             {
                 actions.Add(new SelectableAction(type, () => StartProgramService.StartProgramOfType(type, path, true)));
             }
@@ -64,12 +70,6 @@ namespace OpenRepo.Providers.Local
             foreach (var type in m_programTypesTopFolderToStart)
             {
                 actions.Add(new SelectableAction(type, () => StartProgramService.StartProgramOfType(type, path, true)));
-            }
-
-            var hasGit = GitService.TryGetRemoteGitLocation(path, out string uri);
-            if (hasGit)
-            {
-                actions.Add(new SelectableAction("Web", () => StartProgramService.StartProgram(uri)));
             }
 
             return actions.ToArray();

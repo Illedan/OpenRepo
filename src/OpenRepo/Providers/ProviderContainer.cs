@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using OpenRepo.Contracts;
-using OpenRepo.Providers.EditConfiguration;
 using OpenRepo.Providers.Local;
+using OpenRepo.Providers.OpenRepo;
 using OpenRepo.Providers.Personal;
 using OpenRepo.Services;
 
@@ -19,7 +19,7 @@ namespace OpenRepo.Providers
 
         public static List<IProvider> GetProviders(string configuration)
         {
-            var providers = new List<IProvider> { new EditConfigurationProviderFactory().GetProvider(string.Empty) };
+            var providers = new List<IProvider> { new OpenRepoProviderFactory().GetProvider(string.Empty) };
             var lines = configuration.Split("\n");
             IProviderFactory currentProviderFactory = null;
 

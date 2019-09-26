@@ -6,7 +6,6 @@ namespace OpenRepo.Services
 {
     public static class GitService
     {
-
         public static bool TryGetRemoteGitLocation(string path, out string uri)
         {
             var response = TerminalService.Instance.Term("git config --get remote.origin.url", Output.Hidden, path);

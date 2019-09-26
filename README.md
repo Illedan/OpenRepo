@@ -43,7 +43,8 @@ Personal:
     nuget https://www.nuget.org
 ```
 
-ProviderId is the id set in the `IProviderFactory` and config1/config2/etc.. is not depending on each other. Each line is sent to a fresh new provider of that type.
+| Paths with spaces are only supported if you wrap the whole path in quotes! |
+| --- |
 
 
 ## Providers

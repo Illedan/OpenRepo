@@ -109,36 +109,30 @@ namespace OpenRepo.ViewModels
             }
             else if(input.Key == ConsoleKey.Enter && m_currentItems.Count > 0)
             {
-                try
+                var item = m_currentItems[m_traverser.Current];
+                var actions = m_currentItems[m_traverser.Current].ActionsFactory();
+                if(actions.Length == 1)
                 {
-                    var item = m_currentItems[m_traverser.Current];
-                    var actions = m_currentItems[m_traverser.Current].ActionsFactory();
-                    if(actions.Length == 1)
-                    {
-                        actions[0].Action();
-                    }
-                    else
-                    {
-                        Viewer.Push(new ActionSelectionViewModel(item, actions));
-                    }
+                    actions[0].Action();
+                }
+                else
+                {
+                    Viewer.Push(new ActionSelectionViewModel(item, actions));
+                }
 
-                    m_textHandler.Clear();
-                    UpdateCurrentItems();
-                    LogService.Clear();
-                }
-                catch (Exception e)
-                {
-                    LogService.Log(e.Message);
-                }
+                m_textHandler.Clear();
+                UpdateCurrentItems();
             }
         }
 
         private void UpdateCurrentItems()
         {
-            
             var previousSelected = m_traverser.Current < m_currentItems.Count && m_traverser.Current >= 0 ? m_currentItems[m_traverser.Current] : null;
             var text = m_textHandler.Text;
-            m_currentItems = string.IsNullOrEmpty(m_textHandler.Text) ? m_items : m_items.Where(r => text.Split().All(l => r.Title.Contains(l, StringComparison.OrdinalIgnoreCase))).ToList();
+            m_currentItems = string.IsNullOrEmpty(m_textHandler.Text) ?
+                m_items :
+                m_items.Where(r => text.Split().All(l => r.Title.Contains(l, StringComparison.OrdinalIgnoreCase))).ToList();
+
             m_traverser.Reset(m_currentItems.IndexOf(previousSelected), m_currentItems.Count);
         }
     }
