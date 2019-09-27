@@ -32,9 +32,6 @@ Source: https://github.com/Illedan/OpenRepo</Description>
   </ItemGroup>
     
   <ItemGroup>
-    <Folder Include="*" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="LICENSE.txt" Pack="true" PackagePath="$(PackageLicenseFile)" />
   </ItemGroup>
     

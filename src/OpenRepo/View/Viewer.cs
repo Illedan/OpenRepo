@@ -58,7 +58,7 @@ namespace OpenRepo.View
             }
         }
 
-        private static void Draw(List<TextLine> lines)
+        public static void Draw(List<TextLine> lines)
         {
             Console.Clear();
             foreach(var l in lines)
