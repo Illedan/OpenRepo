@@ -25,7 +25,8 @@ namespace OpenRepo.Services
 
         public static void OpenTerminal(string path)
         {
-            Instance.Term("cd " + path, Output.External);
+            var response = Instance.Term("cd " + path, Output.External);
+            LogService.Log(response.stderr);
         }
     }
 }
