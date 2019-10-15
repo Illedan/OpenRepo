@@ -58,7 +58,7 @@ namespace OpenRepo.ViewModels
             {
                 var tempTraverser = new IndexTraverser(m_traverser.Current, m_currentItems.Count);
                 var visibleItems = new List<SelectableItem>();
-                var max = m_currentItems.Count > 4 ? 11 : m_currentItems.Count;
+                var max = m_currentItems.Count > 11 ? 11 : m_currentItems.Count;
                 var selected = max / 3;
                 for (var i = 0; i < selected; i++) tempTraverser.MovePrevious();
                 for(var i = 0; i < max; i++)
