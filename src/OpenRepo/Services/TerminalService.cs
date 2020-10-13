@@ -29,20 +29,21 @@ namespace OpenRepo.Services
 
         public static void OpenTerminal(string path)
         {
+            var response = Instance.Term("cd " + path, Output.External);
+            LogService.Log(response.stderr);
             if (OS.IsMac())
             {
-                File.WriteAllText(MacBashFileName, $@"
-osascript <<EOF
-    tell application ""Terminal"" to do script ""cd {path};""
-EOF
-clear
-exit 0");
-                Process.Start(MacBashFileName);
+//                File.WriteAllText(MacBashFileName, $@"
+//osascript <<EOF
+//    tell application ""Terminal"" to do script ""cd {path};""
+//EOF
+//clear
+//exit 0");
+//                Process.Start(MacBashFileName);
             }
             else
             {
-                var response = Instance.Term("cd " + path, Output.External);
-                LogService.Log(response.stderr);
+                
             }
         }
     }

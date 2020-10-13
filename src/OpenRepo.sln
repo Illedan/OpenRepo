@@ -1,7 +1,7 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenRepo", "OpenRepo\OpenRepo.csproj", "{FC2F6E54-91AB-4D3A-BCA6-315D75F540AE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Illedan.OpenRepo", "OpenRepo\Illedan.OpenRepo.csproj", "{FC2F6E54-91AB-4D3A-BCA6-315D75F540AE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Other Files", "Other Files", "{7F9C6899-91E0-4518-8459-31C290DEDCCC}"
 	ProjectSection(SolutionItems) = preProject
