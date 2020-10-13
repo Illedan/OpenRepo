@@ -105,7 +105,7 @@ namespace OpenRepo.ViewModels
             else if (input.Key == ConsoleKey.Tab)
             {
                 LogService.Clear();
-                _ = Program.Reset();
+                Program.Reset();
             }
             else if(input.Key == ConsoleKey.Enter && m_currentItems.Count > 0)
             {

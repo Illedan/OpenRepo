@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using OpenRepo.Contracts;
 
 namespace OpenRepo.View
@@ -34,28 +35,31 @@ namespace OpenRepo.View
             Draw(viewModel.GetOutput());
         }
 
-        public static void Start()
+        public static async void Start()
         {
-            while (true)
+            await Task.Run(() =>
             {
-                var hasRenderer = m_viewModelStack.TryPeek(out var viewModel);
-                if (hasRenderer)
+                while (true)
                 {
-                    Draw(viewModel.GetOutput());
-                }
+                    var hasRenderer = m_viewModelStack.TryPeek(out var viewModel);
+                    if (hasRenderer)
+                    {
+                        Draw(viewModel.GetOutput());
+                    }
 
-                var key = Console.ReadKey();
+                    var key = Console.ReadKey();
 
-                if (!hasRenderer)
-                {
-                    hasRenderer = m_viewModelStack.TryPeek(out viewModel);
-                }
+                    if (!hasRenderer)
+                    {
+                        hasRenderer = m_viewModelStack.TryPeek(out viewModel);
+                    }
 
-                if (hasRenderer)
-                {
-                    viewModel.HandleInput(key);
+                    if (hasRenderer)
+                    {
+                        viewModel.HandleInput(key);
+                    }
                 }
-            }
+            });
         }
 
         public static void Draw(List<TextLine> lines)

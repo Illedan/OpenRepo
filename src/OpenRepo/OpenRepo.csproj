@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>openrepo</ToolCommandName>
     <PackageOutputPath>./nupkg</PackageOutputPath>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackOnBuild>true</PackOnBuild>
-    <PackageVersion>0.0.16</PackageVersion>
+    <PackageVersion>0.0.17</PackageVersion>
     <Authors>Erik Kvanli</Authors>
     <Description>Utility tool to navigate between local repositories.
 Source: https://github.com/Illedan/OpenRepo</Description>
@@ -27,8 +27,8 @@ Source: https://github.com/Illedan/OpenRepo</Description>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-    <PackageReference Include="dein.ToolBox" Version="1.5.4" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="dein.ToolBox" Version="1.6.4" />
   </ItemGroup>
     
   <ItemGroup>

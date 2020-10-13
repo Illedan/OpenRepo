@@ -15,7 +15,7 @@ namespace OpenRepo.Providers.OpenRepo
                 new SelectableItem("OpenRepo - Edit config",
                     () => new SelectableAction[]
                     {
-                        new SelectableAction("Edit", () => StartProgramService.StartProgram(ConfigurationService.ConfigurationPath))
+                        new SelectableAction("Edit", ConfigurationService.EditConfig)
                     }),
                 new SelectableItem("OpenRepo - Create issue",
                     () => new SelectableAction[]
