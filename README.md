@@ -3,7 +3,9 @@ Terminal based utility tool to navigate between local repositories.
 Blog about it: https://kvanli.com/stories/openrepo
 
 
-[![Build Status](https://dev.azure.com/ekv0632/OpenRepo/_apis/build/status/Illedan.OpenRepo?branchName=master)](https://dev.azure.com/ekv0632/OpenRepo/_build/latest?definitionId=1&branchName=master) ![nuget](https://img.shields.io/nuget/v/OpenRepo) 
+![badge](https://action-badges.now.sh/Illedan/Openrepo)
+
+![Nuget](https://img.shields.io/nuget/v/Illedan.openrepo?color=%2300aa00&label=Illedan.OpenRepo)
 
 ## Installation
 
