@@ -37,7 +37,7 @@ namespace OpenRepo.Services
             }
 
             File.WriteAllText(ConfigurationPath, DefaultConfig);
-            Process.Start(ConfigurationPath);
+            EditConfig();
             return DefaultConfig;
         }
 

@@ -73,7 +73,7 @@ namespace OpenRepo.Providers.Local
 
             foreach (var type in m_programTypesTopFolderToStart)
             {
-                actions.Add(new SelectableAction(type, () => StartProgramService.StartProgramOfType(type, path, true)));
+                actions.Add(new SelectableAction(type, () => StartProgramService.StartProgramOfType(type, path, false)));
             }
 
             return actions.ToArray();

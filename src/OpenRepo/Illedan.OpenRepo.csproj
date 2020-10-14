@@ -9,7 +9,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackOnBuild>true</PackOnBuild>
     <PackageId>Illedan.OpenRepo</PackageId>
-    <PackageVersion>0.0.22</PackageVersion>
+    <PackageVersion>0.0.24</PackageVersion>
     <Authors>Erik Kvanli</Authors>
     <Description>Utility tool to navigate between local repositories.
 Source: https://github.com/Illedan/OpenRepo</Description>
