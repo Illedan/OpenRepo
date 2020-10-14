@@ -15,7 +15,7 @@ namespace OpenRepo.Providers.OpenRepo
                 new SelectableItem("OpenRepo - Edit config",
                     () => new SelectableAction[]
                     {
-                        new SelectableAction("Edit", () => StartProgramService.StartProgram(ConfigurationService.ConfigurationPath))
+                        new SelectableAction("Edit", ConfigurationService.EditConfig)
                     }),
                 new SelectableItem("OpenRepo - Create issue",
                     () => new SelectableAction[]
@@ -24,11 +24,11 @@ namespace OpenRepo.Providers.OpenRepo
                             OpenRepoVersionService.GetCurrentVersion()+
                             "&body="+HttpUtility.UrlEncode(LogService.Message)))
                     }),
-				new SelectableItem("OpenRepo - Update",
-					() => new SelectableAction[]
-					{
-						new SelectableAction("Open", () => TerminalService.Instance.Term("dotnet tool update openrepo -g", ToolBox.Bridge.Output.Hidden))
-					}),
+				//new SelectableItem("OpenRepo - Update",
+				//	() => new SelectableAction[]
+				//	{
+				//		new SelectableAction("Open", () => TerminalService.Instance.Term("dotnet tool update --global Illedan.OpenRepo", ToolBox.Bridge.Output.Hidden))
+				//	}),
 			});
         }
     }

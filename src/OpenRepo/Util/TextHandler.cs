@@ -17,12 +17,13 @@ namespace OpenRepo.Util
         {
             return input.Key == ConsoleKey.Backspace
                 || char.IsLetterOrDigit(input.KeyChar)
+                || IsAcceptedSpecialCharacter(input.KeyChar)
                 || (m_acceptsSpace && input.Key == ConsoleKey.Spacebar);
         }
 
         public void Handle(ConsoleKeyInfo input)
         {
-            if (char.IsLetterOrDigit(input.KeyChar) || input.Key == ConsoleKey.Spacebar)
+            if (char.IsLetterOrDigit(input.KeyChar) || input.Key == ConsoleKey.Spacebar || IsAcceptedSpecialCharacter(input.KeyChar))
             {
                 Text += input.KeyChar;
             }
@@ -31,6 +32,8 @@ namespace OpenRepo.Util
                 Text = Text.Length > 0 ? Text.Substring(0, Text.Length - 1) : string.Empty;
             }
         }
+
+        private bool IsAcceptedSpecialCharacter(char c) => c == '-' || c == '_' || c == '.';
 
         public void Clear() => Text = string.Empty;
     }

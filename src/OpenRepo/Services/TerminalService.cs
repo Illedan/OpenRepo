@@ -1,13 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using ToolBox.Bridge;
-using ToolBox.Platform;
 
 namespace OpenRepo.Services
 {
     public static class TerminalService
     {
+        private const string BashFileName = "TerminalStarter.sh";
+        private static string MacBashFileName => Path.Combine(StoragelocationService.StorageDirectory, BashFileName);
         private static ShellConfigurator m_instance;
         public static ShellConfigurator Instance
         {
@@ -25,7 +29,8 @@ namespace OpenRepo.Services
 
         public static void OpenTerminal(string path)
         {
-            Instance.Term("cd " + path, Output.External);
+            var response = Instance.Term("cd " + path, Output.External);
+            LogService.Log(response.stderr);
         }
     }
 }

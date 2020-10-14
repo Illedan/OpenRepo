@@ -4,6 +4,7 @@
     {
         public static void Log(string content)
         {
+            if (string.IsNullOrEmpty(content.Trim())) return;
             Message += "\n" + content;
         }
 

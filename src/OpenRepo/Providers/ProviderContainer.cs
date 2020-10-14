@@ -5,6 +5,7 @@ using OpenRepo.Contracts;
 using OpenRepo.Providers.Local;
 using OpenRepo.Providers.OpenRepo;
 using OpenRepo.Providers.Personal;
+using OpenRepo.Providers.Snake;
 using OpenRepo.Services;
 
 namespace OpenRepo.Providers
@@ -14,7 +15,8 @@ namespace OpenRepo.Providers
         private static IProviderFactory[] m_factories =
         {
             new LocalFactory(),
-            new PersonalContentProviderFactory()
+            new PersonalContentProviderFactory(),
+            new SnakeProviderFactory()
         };
 
         public static List<IProvider> GetProviders(string configuration)

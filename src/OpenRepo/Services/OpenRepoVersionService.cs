@@ -13,7 +13,7 @@ namespace OpenRepo.Services
         private static string GetCurrentVersionInternal()
         {
             var tools = TerminalService.Instance.Term("dotnet tool list -g", ToolBox.Bridge.Output.Hidden).stdout.Split("\n");
-            var openRepoTool = tools.FirstOrDefault(t => t.ToLower().StartsWith("openrepo", StringComparison.CurrentCulture));
+            var openRepoTool = tools.FirstOrDefault(t => t.ToLower().StartsWith("illedan.openrepo", StringComparison.CurrentCulture));
 
             if (openRepoTool == null) return "N/A";
 

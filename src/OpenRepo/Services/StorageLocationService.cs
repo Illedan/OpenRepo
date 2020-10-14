@@ -1,9 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using ToolBox.Platform;
-
 namespace OpenRepo.Services
 {
     public static class StoragelocationService
@@ -28,25 +24,4 @@ namespace OpenRepo.Services
             }
         }
     }
-
-    public static class OS
-    {
-        public static bool IsWin() =>
-            RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
-
-        public static bool IsMac() =>
-            RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
-
-        public static bool IsGnu() =>
-            RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
-
-        public static string GetCurrent()
-        {
-            return
-            (IsWin() ? "win" : null) ??
-            (IsMac() ? "mac" : null) ??
-            (IsGnu() ? "gnu" : null);
-        }
-    }
-
 }
