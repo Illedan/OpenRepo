@@ -53,8 +53,12 @@ namespace OpenRepo.Providers.Local
             var actions = new List<SelectableAction>
             {
                 new SelectableAction("Open", () => FolderService.OpenLocation(path)),
-                new SelectableAction("Terminal", () => TerminalService.OpenTerminal(path)),
             };
+
+            //if (false) // Disable until I can figure it out
+            //{
+            //    actions.Add(new SelectableAction("Terminal", () => TerminalService.OpenTerminal(path)));
+            //}
 
             var hasGit = GitService.TryGetRemoteGitLocation(path, out string uri);
             if (hasGit)

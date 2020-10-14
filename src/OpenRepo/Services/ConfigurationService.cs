@@ -1,17 +1,26 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.IO;
 
 namespace OpenRepo.Services
 {
     public static class ConfigurationService
     {
-        private const string DefaultConfig = "# Welcome to OpenRepo\n# Created by https://github.com/Illedan \n# Below you can view a sample configuration if you remove the #s. \n#Local:\n#    c:myPath/\n\n#Personal:\n#    nuget https://www.nuget.org";
+        private static readonly string DefaultConfig =
+            @"
+# Welcome to OpenRepo
+# Created by https://github.com/Illedan
+# Below you can view a sample configuration if you remove the #s.
+#Local:
+#    c:myPath/
+#Personal:
+#    nuget https://www.nuget.org".Replace("\n", Environment.NewLine);
 
-        private const string ConfigLocation = "OpenRepoConfiguration.yaml";
-        private const string NewConfigFile = "OpenRepoConfiguration.txt";
+        private const string OldConfigurationFileName = "OpenRepoConfiguration.yaml";
+        private const string ConfigurationFileName = "OpenRepoConfiguration.txt";
 
-        private static string OldConfigurationPath => Path.Combine(StoragelocationService.StorageDirectory, ConfigLocation);
-        private static string ConfigurationPath => Path.Combine(StoragelocationService.StorageDirectory, NewConfigFile);
+        private static string OldConfigurationPath => Path.Combine(StoragelocationService.StorageDirectory, OldConfigurationFileName);
+        private static string ConfigurationPath => Path.Combine(StoragelocationService.StorageDirectory, ConfigurationFileName);
 
         public static string GetConfig()
         {
