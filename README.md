@@ -1,12 +1,13 @@
 # OpenRepo
-Terminal based utility tool to navigate between local repositories
+Terminal based utility tool to navigate between local repositories.
+Blog about it: https://kvanli.com/stories/openrepo
 
 
 [![Build Status](https://dev.azure.com/ekv0632/OpenRepo/_apis/build/status/Illedan.OpenRepo?branchName=master)](https://dev.azure.com/ekv0632/OpenRepo/_build/latest?definitionId=1&branchName=master) ![nuget](https://img.shields.io/nuget/v/OpenRepo) 
 
 ## Installation
 
-- Run `dotnet tool install --global OpenRepo`
+- Run `dotnet tool install --global Illedan.OpenRepo`
 - Use the command `openrepo`
 - Press Enter to edit config for your needs. For example add:
 ```
