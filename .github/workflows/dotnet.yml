@@ -10,6 +10,9 @@ jobs:
 
     steps:    
     - uses: actions/checkout@v2
+    - name: Read VERSION file
+      id: getversion
+      run: echo "::set-output name=version::$(cat version.config)"
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
@@ -21,7 +24,7 @@ jobs:
     - name: Test
       run: dotnet test src --no-restore --verbosity normal
     - name: Pack
-      run: dotnet pack src/OpenRepo/ --version-suffix CD${GITHUB_RUN_NUMBER}
+      run: dotnet pack src/OpenRepo/ -p:Version=${{ steps.getversion.outputs.version }}.${GITHUB_RUN_NUMBER}
     - name: Publish Nuget
       run: dotnet nuget push src/OpenRepo/nupkg/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGETORG }} --skip-duplicate
 
