@@ -20,12 +20,8 @@ jobs:
       run: dotnet build src --configuration Release --no-restore
     - name: Test
       run: dotnet test src --no-restore --verbosity normal
+    - name: Pack
+      run: dotnet pack src/OpenRepo/ --version-suffix CI${GITHUB_RUN_NUMBER}
     - name: Publish Nuget
-      uses: brandedoutcast/publish-nuget@v2.5.5
-      with:
-        NUGET_KEY: ${{ secrets.PUBLISHNUGET }}
-        PROJECT_FILE_PATH: src/OpenRepo/Illedan.OpenRepo.csproj
-        PACKAGE_NAME: Illedan.OpenRepo
-        VERSION_STATIC: Nerdbank.GitVersioning
-        TAG_COMMIT: true
+      run: dotnet nuget push src/OpenRepo/nupkg/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.PUBLISHNUGET }} --skip-duplicate
 
