@@ -23,5 +23,5 @@ jobs:
     - name: Pack
       run: dotnet pack src/OpenRepo/ --version-suffix CI${GITHUB_RUN_NUMBER}
     - name: Publish Nuget
-      run: dotnet nuget push src/OpenRepo/nupkg/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.PUBLISHNUGET }} --skip-duplicate
+      run: dotnet nuget push src/OpenRepo/nupkg/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGETORG }} --skip-duplicate
 
