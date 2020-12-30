@@ -21,7 +21,7 @@ jobs:
     - name: Test
       run: dotnet test src --no-restore --verbosity normal
     - name: Pack
-      run: dotnet pack src/OpenRepo/ --version-suffix CI${GITHUB_RUN_NUMBER}
+      run: dotnet pack src/OpenRepo/ --version-suffix CD${GITHUB_RUN_NUMBER}
     - name: Publish Nuget
       run: dotnet nuget push src/OpenRepo/nupkg/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGETORG }} --skip-duplicate
 
