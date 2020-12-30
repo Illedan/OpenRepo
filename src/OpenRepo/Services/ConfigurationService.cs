@@ -36,6 +36,7 @@ namespace OpenRepo.Services
                 return config;
             }
 
+            Directory.CreateDirectory(StoragelocationService.StorageDirectory);
             File.WriteAllText(ConfigurationPath, DefaultConfig);
             EditConfig();
             return DefaultConfig;
