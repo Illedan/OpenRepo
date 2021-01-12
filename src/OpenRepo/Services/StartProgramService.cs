@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using Illedan.OpenRepo.Providers.Local;
 using OpenRepo.Contracts;
 using OpenRepo.View;
 using OpenRepo.ViewModels;
@@ -37,6 +38,12 @@ namespace OpenRepo.Services
             };
 
             Process.Start(startInfo);
+        }
+
+        public static void RunScript(LocalScript script, string path)
+        {
+            var toRun = script.Value.Replace("{{path}}", path);
+            TerminalService.Instance.Term(toRun);
         }
     }
 }
