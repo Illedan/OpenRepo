@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Illedan.OpenRepo.Providers.Local;
 using OpenRepo.Contracts;
 using OpenRepo.Services;
 
@@ -16,6 +17,7 @@ namespace OpenRepo.Providers.Local
         private readonly string m_prefix;
         private readonly string[] m_programTypesToStart;
         private readonly string[] m_programTypesTopFolderToStart;
+        private readonly LocalScript[] m_scripts;
 
         public LocalProvider(string configuration)
         {
@@ -26,19 +28,26 @@ namespace OpenRepo.Providers.Local
                 throw new Exception("Folder not found: " + m_path);
             }
 
-            m_prefix = splittedConfig
-                .FirstOrDefault(s => s.StartsWith("prefix:", StringComparison.CurrentCultureIgnoreCase))
-                ?.Split(':').Last() ?? string.Empty;
+            var splitters = splittedConfig.Skip(1).Select(s => new LocalScript(s)).ToList();
 
-            m_programTypesToStart = splittedConfig
-                .Where(s => s.StartsWith("pt:", StringComparison.CurrentCultureIgnoreCase))
-                .Select(s => s.Split(':').Last()) 
+            m_prefix = splitters
+                .FirstOrDefault(s => s.Key == "prefix")
+                ?.Value ?? string.Empty;
+
+
+            m_programTypesToStart = splitters
+                .Where(s => s.Key == "pt")
+                .Select(s => s.Value) 
                 .ToArray();
 
-            m_programTypesTopFolderToStart = splittedConfig
-                .Where(s => s.StartsWith("ptt:", StringComparison.CurrentCultureIgnoreCase))
-                .Select(s => s.Split(':').Last()) 
+            m_programTypesTopFolderToStart = splitters
+                .Where(s => s.Key=="ptt")
+                .Select(s => s.Value) 
                 .ToArray();
+
+            splitters.RemoveAll(s => s.Key == "pt" || s.Key == "ptt" || s.Key == "prefix");
+
+            m_scripts = splitters.ToArray();
         }
 
         public Task<ConcurrentBag<SelectableItem>> GetItems()
@@ -74,6 +83,11 @@ namespace OpenRepo.Providers.Local
             foreach (var type in m_programTypesTopFolderToStart)
             {
                 actions.Add(new SelectableAction(type, () => StartProgramService.StartProgramOfType(type, path, false)));
+            }
+
+            foreach(var script in m_scripts)
+            {
+                actions.Add(new SelectableAction(script.Key, () => StartProgramService.RunScript(script, path)));
             }
 
             return actions.ToArray();
