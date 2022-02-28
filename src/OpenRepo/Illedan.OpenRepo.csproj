@@ -32,6 +32,7 @@ Source: https://github.com/Illedan/OpenRepo</Description>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="dein.ToolBox" Version="1.6.4" />
+    <PackageReference Include="TextCopy" Version="6.1.0" />
   </ItemGroup>
     
   <ItemGroup>
