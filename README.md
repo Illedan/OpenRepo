@@ -84,6 +84,23 @@ Personal:
 Nuget would send the user to nuget.org and cool_user to Illedan's github profile.
 This could also be folders in your file system, script, whatever you like :) 
 
+### Settings
+
+Setup configuration for open repo. For now the only possible action is to ignore folders when finding files of certain types. An example is to ignore `node_modules` as it is a very big folder.
+```
+Settings:
+    ignore bin
+    ignore node_modules
+```
+
+### Clipboard
+
+Copies the last phrase of the text to your clipboard.
+```
+Clipboard:
+    DIS_ID 12345
+```
+
 ## Running on Windows with AutoHotkey
 One approach to working with openrepo on a windows machine is to use an AutoHotkey script to fire it and if it is already running, just bring it in to view.
 

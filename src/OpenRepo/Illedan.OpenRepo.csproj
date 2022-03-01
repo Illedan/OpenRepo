@@ -36,6 +36,9 @@ Source: https://github.com/Illedan/OpenRepo</Description>
   </ItemGroup>
     
   <ItemGroup>
+    <None Remove="Providers\Settings\" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="LICENSE.txt" Pack="true" PackagePath="$(PackageLicenseFile)" />
   </ItemGroup>
     
@@ -46,5 +49,8 @@ Source: https://github.com/Illedan/OpenRepo</Description>
   <ItemGroup>
     <None Update="DefaultConfiguration.txt">
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Providers\Settings\" />
   </ItemGroup>
 </Project>
