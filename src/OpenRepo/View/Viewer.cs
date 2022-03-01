@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using OpenRepo.Contracts;
 
@@ -61,15 +62,19 @@ namespace OpenRepo.View
                 }
             });
         }
-
+        private static TextWriter _tw = Console.Out;
         public static void Draw(List<TextLine> lines)
         {
+            Console.SetError(TextWriter.Null);
+            Console.SetOut(_tw);
             Console.Clear();
             foreach(var l in lines)
             {
                 Console.ForegroundColor = l.Color;
                 Console.WriteLine(l.Title);
             }
+
+            Console.SetOut(TextWriter.Null);
         }
     }
 }
