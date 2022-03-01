@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Illedan.OpenRepo.Providers.Copy;
+using Illedan.OpenRepo.Providers.Settings;
 using OpenRepo.Contracts;
 using OpenRepo.Providers.Local;
 using OpenRepo.Providers.OpenRepo;
@@ -18,7 +19,8 @@ namespace OpenRepo.Providers
             new LocalFactory(),
             new PersonalContentProviderFactory(),
             new SnakeProviderFactory(),
-            new CopyTextProviderFactory()
+            new CopyTextProviderFactory(),
+            new SettingsProviderFactory()
         };
 
         public static List<IProvider> GetProviders(string configuration)
