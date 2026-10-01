@@ -9,6 +9,8 @@ Blog about it: https://kvanli.com/stories/openrepo
 
 ## Installation
 
+Requires the [.NET SDK](https://dotnet.microsoft.com/download) 8.0 or newer.
+
 - Run `dotnet tool install --global Illedan.OpenRepo`
 - Use the command `openrepo`
 - Press Enter to edit config for your needs. For example add:
@@ -21,10 +23,7 @@ Local:
 ## Run from project
 
 - Clone
-- `cd` into src
-- Run `dotnet publish`
-- `cd` into OpenRepo/bin/Debug/netcoreapp2.1/publish/
-- `dotnet run OpenRepo.dll`
+- From the repository root, run `dotnet run --project src/OpenRepo`
 
 ## Usages
 

@@ -4,8 +4,9 @@
     <VersionPrefix>1.0.0</VersionPrefix>
     <VersionSuffix>0</VersionSuffix>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <PackAsTool>true</PackAsTool>
+    <RollForward>Major</RollForward>
     <ToolCommandName>openrepo</ToolCommandName>
     <PackageOutputPath>./nupkg</PackageOutputPath>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
@@ -30,9 +31,8 @@ Source: https://github.com/Illedan/OpenRepo</Description>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="dein.ToolBox" Version="1.6.4" />
-    <PackageReference Include="TextCopy" Version="6.1.0" />
+    <PackageReference Include="dein.ToolBox" Version="1.11.0" />
+    <PackageReference Include="TextCopy" Version="6.2.1" />
   </ItemGroup>
     
   <ItemGroup>
@@ -42,10 +42,6 @@ Source: https://github.com/Illedan/OpenRepo</Description>
     <None Include="LICENSE.txt" Pack="true" PackagePath="$(PackageLicenseFile)" />
   </ItemGroup>
     
-  <ItemGroup>
-     <Content Include="cmd.bat" Link="cmd.bat" CopyToOutputDirectory="PreserveNewest" Pack="True" />
-     <Content Include="cmd.sh" Link="cmd.sh" CopyToOutputDirectory="PreserveNewest" Pack="True" />
-  </ItemGroup>
   <ItemGroup>
     <None Update="DefaultConfiguration.txt">
     </None>
