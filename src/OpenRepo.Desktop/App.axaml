@@ -1,0 +1,40 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="OpenRepo.Desktop.App"
+             Name="OpenRepo"
+             RequestedThemeVariant="Default">
+  <Application.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Light">
+          <SolidColorBrush x:Key="WindowBrush" Color="#F6F6F7" />
+          <SolidColorBrush x:Key="TextBrush" Color="#1D1D1F" />
+          <SolidColorBrush x:Key="MutedTextBrush" Color="#6E6E73" />
+          <SolidColorBrush x:Key="DividerBrush" Color="#E2E2E5" />
+          <SolidColorBrush x:Key="HoverBrush" Color="#EAEAED" />
+          <SolidColorBrush x:Key="AccentBrush" Color="#2563EB" />
+          <SolidColorBrush x:Key="OnAccentBrush" Color="#FFFFFF" />
+          <SolidColorBrush x:Key="KeyCapBrush" Color="#E6E6EA" />
+          <SolidColorBrush x:Key="ErrorBrush" Color="#C42B1C" />
+          <SolidColorBrush x:Key="ErrorBackgroundBrush" Color="#FDECEA" />
+        </ResourceDictionary>
+        <ResourceDictionary x:Key="Dark">
+          <SolidColorBrush x:Key="WindowBrush" Color="#1E1E20" />
+          <SolidColorBrush x:Key="TextBrush" Color="#F2F2F4" />
+          <SolidColorBrush x:Key="MutedTextBrush" Color="#98989F" />
+          <SolidColorBrush x:Key="DividerBrush" Color="#333337" />
+          <SolidColorBrush x:Key="HoverBrush" Color="#2A2A2D" />
+          <SolidColorBrush x:Key="AccentBrush" Color="#3B76F6" />
+          <SolidColorBrush x:Key="OnAccentBrush" Color="#FFFFFF" />
+          <SolidColorBrush x:Key="KeyCapBrush" Color="#36363A" />
+          <SolidColorBrush x:Key="ErrorBrush" Color="#FF8A80" />
+          <SolidColorBrush x:Key="ErrorBackgroundBrush" Color="#3A2224" />
+        </ResourceDictionary>
+      </ResourceDictionary.ThemeDictionaries>
+    </ResourceDictionary>
+  </Application.Resources>
+
+  <Application.Styles>
+    <FluentTheme />
+  </Application.Styles>
+</Application>

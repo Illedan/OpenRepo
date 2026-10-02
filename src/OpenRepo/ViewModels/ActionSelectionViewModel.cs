@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using OpenRepo.Contracts;
+using OpenRepo.Services;
 using OpenRepo.Util;
 using OpenRepo.View;
 
@@ -11,25 +12,14 @@ namespace OpenRepo.ViewModels
     {
         private readonly IndexTraverser m_traverser = new IndexTraverser(0, 1);
         private SelectableAction[] m_actions;
-        private IDictionary<char, SelectableAction> m_actionMapping = new Dictionary<char, SelectableAction>();
+        private IDictionary<char, SelectableAction> m_actionMapping;
         private string m_title;
         public ActionSelectionViewModel(SelectableItem item, SelectableAction[] actions = null)
         {
             m_actions = actions ?? item.ActionsFactory();
             m_title = item.Title;
             m_traverser.Reset(0, m_actions.Length);
-            foreach(var action in m_actions)
-            {
-                var targetLetter = action.Title.ToLower().FirstOrDefault(letter => !m_actionMapping.ContainsKey(letter));
-                if(targetLetter == 0)
-                {
-                    m_actionMapping.Add((char)('0' + m_actions.ToList().IndexOf(action) + 1), action);
-                }
-                else
-                {
-                    m_actionMapping.Add(targetLetter, action);
-                }
-            }
+            m_actionMapping = ActionShortcutService.GetShortcuts(m_actions);
         }
 
         public List<TextLine> GetOutput()

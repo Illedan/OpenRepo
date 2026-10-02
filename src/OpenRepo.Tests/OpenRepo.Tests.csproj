@@ -4,6 +4,8 @@
     <TargetFramework>net8.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
+    <!-- Avalonia's analyzers, from the desktop project, need a newer C# compiler than the .NET 8 and 9.0.1xx SDKs have. -->
+    <NoWarn>$(NoWarn);CS9057</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -30,5 +32,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OpenRepo\Illedan.OpenRepo.csproj" />
+    <ProjectReference Include="..\OpenRepo.Desktop\OpenRepo.Desktop.csproj" />
   </ItemGroup>
 </Project>

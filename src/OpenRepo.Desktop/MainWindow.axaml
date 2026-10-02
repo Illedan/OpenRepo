@@ -1,0 +1,158 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="using:OpenRepo.Desktop"
+        x:Class="OpenRepo.Desktop.MainWindow"
+        x:DataType="local:LauncherViewModel"
+        Title="OpenRepo"
+        Icon="/Assets/icon.png"
+        Width="680" Height="460"
+        MinWidth="420" MinHeight="280"
+        WindowStartupLocation="CenterScreen"
+        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaTitleBarHeightHint="36"
+        Background="{DynamicResource WindowBrush}"
+        Foreground="{DynamicResource TextBrush}">
+
+  <Window.Styles>
+    <Style Selector="TextBox#Search">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="Padding" Value="10,6" />
+      <Setter Property="FontSize" Value="21" />
+      <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+      <Setter Property="PlaceholderForeground" Value="{DynamicResource MutedTextBrush}" />
+      <Setter Property="CaretBrush" Value="{DynamicResource AccentBrush}" />
+      <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
+    <Style Selector="TextBox#Search:pointerover /template/ Border#PART_BorderElement, TextBox#Search:focus /template/ Border#PART_BorderElement">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="BorderThickness" Value="0" />
+    </Style>
+
+    <Style Selector="ListBox#Results">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Padding" Value="0,6" />
+    </Style>
+    <Style Selector="ListBox#Results ListBoxItem">
+      <Setter Property="Margin" Value="8,1" />
+      <Setter Property="Padding" Value="12,0" />
+      <Setter Property="MinHeight" Value="34" />
+      <Setter Property="CornerRadius" Value="7" />
+      <Setter Property="Focusable" Value="False" />
+      <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+    </Style>
+    <Style Selector="ListBox#Results ListBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource HoverBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+    </Style>
+    <Style Selector="ListBox#Results ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter, ListBox#Results ListBoxItem:selected:pointerover /template/ ContentPresenter#PART_ContentPresenter, ListBox#Results ListBoxItem:selected:pressed /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource AccentBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource OnAccentBrush}" />
+    </Style>
+
+    <Style Selector="Border.keycap">
+      <Setter Property="Background" Value="{DynamicResource KeyCapBrush}" />
+      <Setter Property="CornerRadius" Value="4" />
+      <Setter Property="Padding" Value="6,1" />
+      <Setter Property="MinWidth" Value="22" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="Border.keycap > TextBlock">
+      <Setter Property="FontSize" Value="11" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="ListBoxItem:selected Border.keycap">
+      <Setter Property="Background" Value="#33FFFFFF" />
+    </Style>
+
+    <Style Selector="StackPanel.hints">
+      <Setter Property="Orientation" Value="Horizontal" />
+      <Setter Property="Spacing" Value="14" />
+    </Style>
+    <Style Selector="StackPanel.hint">
+      <Setter Property="Orientation" Value="Horizontal" />
+      <Setter Property="Spacing" Value="6" />
+    </Style>
+    <Style Selector="StackPanel.hint > TextBlock, TextBlock.hint">
+      <Setter Property="FontSize" Value="12" />
+      <Setter Property="Foreground" Value="{DynamicResource MutedTextBrush}" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="StackPanel.hint Border.keycap > TextBlock">
+      <Setter Property="Foreground" Value="{DynamicResource MutedTextBrush}" />
+    </Style>
+  </Window.Styles>
+
+  <Grid RowDefinitions="36,Auto,Auto,*,Auto">
+    <TextBlock Text="OpenRepo"
+               HorizontalAlignment="Center" VerticalAlignment="Center"
+               FontSize="12" FontWeight="SemiBold"
+               Foreground="{DynamicResource MutedTextBrush}"
+               IsHitTestVisible="False" />
+
+    <Grid Grid.Row="1" ColumnDefinitions="Auto,*" Margin="22,0,20,10">
+      <Path Width="18" Height="18" Stretch="Uniform" VerticalAlignment="Center"
+            Fill="{DynamicResource MutedTextBrush}"
+            Data="M 9.5 3 A 6.5 6.5 0 1 0 13.53 14.6 L 17.96 19.03 A 1 1 0 0 0 19.37 17.62 L 14.94 13.19 A 6.5 6.5 0 0 0 9.5 3 Z M 9.5 5 A 4.5 4.5 0 1 1 9.5 14 A 4.5 4.5 0 0 1 9.5 5 Z" />
+      <TextBox x:Name="Search" Grid.Column="1"
+               Text="{Binding SearchText}"
+               PlaceholderText="Search repositories and links" />
+    </Grid>
+
+    <StackPanel Grid.Row="2">
+      <Border IsVisible="{Binding HasMessage}"
+              Background="{DynamicResource ErrorBackgroundBrush}"
+              CornerRadius="8" Margin="16,0,16,10" Padding="12,8">
+        <SelectableTextBlock Text="{Binding Message}"
+                             Foreground="{DynamicResource ErrorBrush}"
+                             TextWrapping="Wrap" MaxHeight="96" />
+      </Border>
+      <TextBlock IsVisible="{Binding IsChoosingAction}"
+                 Text="{Binding ActionTitle, StringFormat='Choose action for {0}'}"
+                 Margin="22,0,22,8" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
+      <Border Height="1" Background="{DynamicResource DividerBrush}" />
+    </StackPanel>
+
+    <Grid Grid.Row="3">
+      <ListBox x:Name="Results"
+               ItemsSource="{Binding Rows}"
+               SelectedIndex="{Binding SelectedIndex}"
+               Focusable="False">
+        <ListBox.ItemTemplate>
+          <DataTemplate x:DataType="local:LauncherRow">
+            <Grid ColumnDefinitions="*,Auto">
+              <TextBlock Text="{Binding Title}" FontSize="14"
+                         VerticalAlignment="Center" TextTrimming="CharacterEllipsis" />
+              <Border Grid.Column="1" Classes="keycap" Margin="12,0,0,0" IsVisible="{Binding HasShortcut}">
+                <TextBlock Text="{Binding Shortcut}" />
+              </Border>
+            </Grid>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
+      <TextBlock IsVisible="{Binding IsEmpty}" Text="{Binding EmptyText}"
+                 HorizontalAlignment="Center" VerticalAlignment="Center"
+                 TextAlignment="Center" TextWrapping="Wrap" Margin="32"
+                 Foreground="{DynamicResource MutedTextBrush}" />
+    </Grid>
+
+    <Border Grid.Row="4" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource DividerBrush}" Padding="18,9">
+      <Grid ColumnDefinitions="*,Auto">
+        <StackPanel Classes="hints" IsVisible="{Binding !IsChoosingAction}">
+          <StackPanel Classes="hint"><Border Classes="keycap"><TextBlock Text="↑↓" /></Border><TextBlock Text="Select" /></StackPanel>
+          <StackPanel Classes="hint"><Border Classes="keycap"><TextBlock Text="↵" /></Border><TextBlock Text="Open" /></StackPanel>
+          <StackPanel Classes="hint"><Border Classes="keycap"><TextBlock Text="tab" /></Border><TextBlock Text="Reload" /></StackPanel>
+          <StackPanel Classes="hint"><Border Classes="keycap"><TextBlock Text="esc" /></Border><TextBlock Text="Hide" /></StackPanel>
+        </StackPanel>
+        <StackPanel Classes="hints" IsVisible="{Binding IsChoosingAction}">
+          <StackPanel Classes="hint"><Border Classes="keycap"><TextBlock Text="↑↓" /></Border><TextBlock Text="Select" /></StackPanel>
+          <StackPanel Classes="hint"><Border Classes="keycap"><TextBlock Text="↵" /></Border><TextBlock Text="Run" /></StackPanel>
+          <StackPanel Classes="hint"><Border Classes="keycap"><TextBlock Text="A–Z" /></Border><TextBlock Text="Shortcut" /></StackPanel>
+          <StackPanel Classes="hint"><Border Classes="keycap"><TextBlock Text="esc" /></Border><TextBlock Text="Back" /></StackPanel>
+        </StackPanel>
+        <TextBlock x:Name="HotKeyHint" Grid.Column="1" Classes="hint" IsVisible="False" />
+      </Grid>
+    </Border>
+  </Grid>
+</Window>

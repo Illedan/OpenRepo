@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using OpenRepo.Contracts;
 using OpenRepo.Providers;
+using OpenRepo.Providers.Snake;
 using OpenRepo.Services;
 using OpenRepo.Util;
 using OpenRepo.View;
@@ -15,27 +16,19 @@ namespace OpenRepo.ViewModels
     {
         private readonly TextHandler m_textHandler = new TextHandler(string.Empty, true);
         private readonly IndexTraverser m_traverser = new IndexTraverser(0, 1);
-        private readonly List<IProvider> m_providers;
+        private readonly string m_configuration;
 
         private List<SelectableItem> m_items;
         private List<SelectableItem> m_currentItems;
 
         public MainViewModel(string configuration)
         {
-            m_providers = ProviderContainer.GetProviders(configuration);
+            m_configuration = configuration;
         }
 
         public async Task Initialize()
         {
-            var tasks = m_providers.Select(p => p.GetItems()).ToArray();
-            await Task.WhenAll(tasks);
-            m_items = new List<SelectableItem>();
-            foreach(var t in tasks)
-            {
-                m_items.AddRange(await t); // Keep concurrentbags to get late data
-            }
-
-            m_items = m_items.OrderBy(i => i.Title).ToList(); //TODO: Add sorted from the start.
+            m_items = await ProviderContainer.GetItems(m_configuration, new SnakeProviderFactory());
             m_currentItems = m_items;
             UpdateCurrentItems();
         }
@@ -128,10 +121,7 @@ namespace OpenRepo.ViewModels
         private void UpdateCurrentItems()
         {
             var previousSelected = m_traverser.Current < m_currentItems.Count && m_traverser.Current >= 0 ? m_currentItems[m_traverser.Current] : null;
-            var text = m_textHandler.Text;
-            m_currentItems = string.IsNullOrEmpty(m_textHandler.Text) ?
-                m_items :
-                m_items.Where(r => text.Split().All(l => r.Title.Contains(l, StringComparison.OrdinalIgnoreCase))).ToList();
+            m_currentItems = ItemFilterService.Filter(m_items, m_textHandler.Text);
 
             m_traverser.Reset(m_currentItems.IndexOf(previousSelected), m_currentItems.Count);
         }

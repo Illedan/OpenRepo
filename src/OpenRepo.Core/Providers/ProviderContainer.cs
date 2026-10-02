@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Illedan.OpenRepo.Providers.Copy;
 using Illedan.OpenRepo.Providers.Settings;
 using OpenRepo.Contracts;
 using OpenRepo.Providers.Local;
 using OpenRepo.Providers.OpenRepo;
 using OpenRepo.Providers.Personal;
-using OpenRepo.Providers.Snake;
 using OpenRepo.Services;
 
 namespace OpenRepo.Providers
@@ -18,13 +18,24 @@ namespace OpenRepo.Providers
         {
             new LocalFactory(),
             new PersonalContentProviderFactory(),
-            new SnakeProviderFactory(),
             new CopyTextProviderFactory(),
             new SettingsProviderFactory()
         };
 
-        public static List<IProvider> GetProviders(string configuration)
+        /// <summary>
+        /// Loads the items of every provider in the configuration, sorted by title.
+        /// </summary>
+        /// <param name="extraFactories">Providers only one of the user interfaces supports, like the terminal's Snake.</param>
+        public static async Task<List<SelectableItem>> GetItems(string configuration, params IProviderFactory[] extraFactories)
         {
+            var tasks = GetProviders(configuration, extraFactories).Select(p => p.GetItems()).ToArray();
+            await Task.WhenAll(tasks);
+            return tasks.SelectMany(t => t.Result).OrderBy(i => i.Title).ToList();
+        }
+
+        public static List<IProvider> GetProviders(string configuration, params IProviderFactory[] extraFactories)
+        {
+            var factories = m_factories.Concat(extraFactories).ToArray();
             var providers = new List<IProvider> { new OpenRepoProviderFactory().GetProvider(string.Empty) };
             var lines = configuration.Split("\n");
             IProviderFactory currentProviderFactory = null;
@@ -51,7 +62,7 @@ namespace OpenRepo.Providers
                     else if(!string.IsNullOrEmpty(line.Trim()))
                     {
                         var providerId = line.Replace(":", " ").Trim();
-                        currentProviderFactory = m_factories.FirstOrDefault(f => f.Id == providerId);
+                        currentProviderFactory = factories.FirstOrDefault(f => f.Id == providerId);
                         if (currentProviderFactory == null)
                         {
                             LogService.Log($"Can't find provider with id {providerId}");

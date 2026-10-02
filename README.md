@@ -25,6 +25,18 @@ Local:
 - Clone
 - From the repository root, run `dotnet run --project src/OpenRepo`
 
+## Desktop app (macOS)
+
+A launcher window with the same search, actions and config as the terminal version, that you can keep in the Dock and open from anywhere with `⌘'`.
+
+- From the repository root, run `./build-mac-app.sh --install`. It builds `OpenRepo.app`, copies it to `/Applications` and opens it.
+- Press `⌘'` in any app to show or hide OpenRepo. It uses the key that types `'` on your keyboard layout.
+- Right-click the Dock icon and choose Options → Keep in Dock, and Options → Open at Login so the shortcut works after a restart.
+
+Closing the window keeps OpenRepo running in the background for the shortcut, quit it with `⌘Q`. Keys: arrows to select, enter to open, the highlighted letter to pick an action, esc to go back or hide, tab to reload the config. Snake is only in the terminal version.
+
+The app is signed for use on the Mac that builds it, not notarized for sharing. To run it without building the app: `dotnet run --project src/OpenRepo.Desktop`
+
 ## Usages
 
 Write anything to filter your list of choices (only availiable at the start screen).

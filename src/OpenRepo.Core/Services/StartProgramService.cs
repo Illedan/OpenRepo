@@ -4,8 +4,6 @@ using System.IO;
 using System.Linq;
 using Illedan.OpenRepo.Providers.Local;
 using OpenRepo.Contracts;
-using OpenRepo.View;
-using OpenRepo.ViewModels;
 
 namespace OpenRepo.Services
 {
@@ -24,7 +22,7 @@ namespace OpenRepo.Services
             if(programs.Length > 1)
             {
                 var item = new SelectableItem(path + "*." + programType, () => programs.Select(p => new SelectableAction(FileService.GetFileName(p), () => StartProgram(p))).ToArray());
-                Viewer.Push(new ActionSelectionViewModel(item));
+                ActionSelectionService.Show(item);
             }
             else
             {

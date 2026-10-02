@@ -31,13 +31,9 @@ Source: https://github.com/Illedan/OpenRepo</Description>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="dein.ToolBox" Version="1.11.0" />
-    <PackageReference Include="TextCopy" Version="6.2.1" />
+    <ProjectReference Include="..\OpenRepo.Core\OpenRepo.Core.csproj" />
   </ItemGroup>
     
-  <ItemGroup>
-    <None Remove="Providers\Settings\" />
-  </ItemGroup>
   <ItemGroup>
     <None Include="LICENSE.txt" Pack="true" PackagePath="$(PackageLicenseFile)" />
   </ItemGroup>
@@ -45,8 +41,5 @@ Source: https://github.com/Illedan/OpenRepo</Description>
   <ItemGroup>
     <None Update="DefaultConfiguration.txt">
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Providers\Settings\" />
   </ItemGroup>
 </Project>

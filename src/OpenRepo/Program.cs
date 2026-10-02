@@ -11,6 +11,7 @@ namespace OpenRepo
     {
         static async Task Main()
         {
+            ActionSelectionService.Handler = item => Viewer.Push(new ActionSelectionViewModel(item));
             Viewer.Start();
             Reset();
             await new TaskCompletionSource<object>().Task;
